@@ -6,6 +6,7 @@ import { Box, Typography } from "@mui/material";
 import SearchBar from "../common/searchBar/SearchBar";
 // Import Logo
 import Logo from "../../../public/static/Logo.svg";
+import Link from "next/link";
 
 const Header: React.FC = () => {
   return (
@@ -13,13 +14,17 @@ const Header: React.FC = () => {
       {/* Header Content Wrapepr */}
       <Box className="max-w-8xl w-full flex sm:grid sm:grid-cols-2 items-center">
         {/* Logo Wrapper */}
-        <Box className="relative flex items-center w-40 h-8 cursor-pointer">
-          <Image
-            src={Logo}
-            layout="fill"
-            objectFit="contain"
-            objectPosition="left"
-          />
+        <Box className="relative flex items-center w-40 h-8">
+          <Link href="/">
+            <a>
+              <Image
+                src={Logo}
+                layout="fill"
+                objectFit="contain"
+                objectPosition="left"
+              />
+            </a>
+          </Link>
         </Box>
 
         {/* Search Bar Wrapper */}

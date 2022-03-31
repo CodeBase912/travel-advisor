@@ -57,6 +57,8 @@ const SearchBar = () => {
           }}
           className="text-white flex items-center justify-center bg-primary rounded-full"
           variant="contained"
+          disableRipple
+          disableElevation
         >
           {Icons.search}
         </Button>
