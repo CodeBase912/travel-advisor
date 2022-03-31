@@ -11,7 +11,7 @@ const Home: NextPage = () => {
   return (
     <Box>
       <Header />
-      <main className="h-80">Hello world</main>
+      {/* <main className="h-80">Hello world</main> */}
       {/* <Footer /> */}
     </Box>
   );

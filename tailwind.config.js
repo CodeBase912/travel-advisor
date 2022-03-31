@@ -4,14 +4,17 @@ module.exports = {
     "./components/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    colors: {
-      primary: "#000",
-      secondary: "#FF4DC4",
-      white: "#fff",
-      error: "#f00",
-      grey: "#eee",
+    extend: {
+      colors: {
+        primary: "#FF385C",
+        secondary: "#FF385C",
+        error: "#f00",
+        grey: "#eee",
+      },
+      maxWidth: {
+        "8xl": "1440px",
+      },
     },
-    extend: {},
   },
   plugins: [],
 };
