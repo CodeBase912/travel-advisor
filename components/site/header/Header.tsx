@@ -3,7 +3,7 @@ import Image from "next/image";
 // Import MaterialUI Components
 import { Box, Typography } from "@mui/material";
 // Import Custom React Components
-import SearchBar from "../common/searchBar/SearchBar";
+import SearchBar from "../../common/searchBar/SearchBar";
 // Import Logo
 import Logo from "../../../public/static/Logo.svg";
 import Link from "next/link";

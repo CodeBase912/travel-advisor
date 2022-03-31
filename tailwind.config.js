@@ -14,6 +14,19 @@ module.exports = {
       maxWidth: {
         "8xl": "1440px",
       },
+      height: {
+        "60p": "60vh",
+        "70p": "70vh",
+        "80p": "80vh",
+      },
+      minHeight: {
+        1: "1px",
+        5: "5px",
+        10: "10px",
+        20: "100px",
+        50: "300px",
+        80: "400px",
+      },
     },
   },
   plugins: [],
