@@ -1,7 +1,7 @@
 import React from "react";
 import { Controller, useForm, SubmitHandler } from "react-hook-form";
 // Import MaterialUI Components
-import { Box, Input, Button } from "@mui/material";
+import { Box, Input, IconButton } from "@mui/material";
 // Import Custom React Components
 import { Icons } from "../icons";
 
@@ -31,14 +31,10 @@ const SearchBar = () => {
             formState,
           }) => (
             <Input
-              //   defaultValue=""
               value={value}
               placeholder={"Search for places to see"}
               disableUnderline
-              sx={{
-                color: "gray",
-              }}
-              className="w-full"
+              className="w-full text-gray-600 mr-3"
               {...methods.register("search")}
               // onBlur={onBlur} // notify when input is touched
               // onChange={onChange} // send value to hook form
@@ -46,22 +42,13 @@ const SearchBar = () => {
             />
           )}
         />
-        <Button
+        <IconButton
           type="submit"
-          sx={{
-            height: "30px",
-            width: "30px",
-            minWidth: "0px",
-            padding: "0.62rem",
-            borderRadius: "100%",
-          }}
-          className="text-white flex items-center justify-center bg-primary rounded-full"
-          variant="contained"
           disableRipple
-          disableElevation
+          className="bg-primary p-2 text-sm text-white active:bg-primary-dark"
         >
           {Icons.search}
-        </Button>
+        </IconButton>
       </form>
     </Box>
   );

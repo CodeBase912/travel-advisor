@@ -10,13 +10,13 @@ import Link from "next/link";
 
 const Header: React.FC = () => {
   return (
-    <header className="sticky top-0 z-50 p-2 bg-white shadow-md flex justify-center items-center">
+    <header className="fixed w-full top-0 z-50 p-2 lg:px-5 bg-white shadow-md flex justify-center items-center">
       {/* Header Content Wrapepr */}
       <Box className="max-w-8xl w-full flex sm:grid sm:grid-cols-2 items-center">
         {/* Logo Wrapper */}
-        <Box className="relative flex items-center w-40 h-8">
+        <Box className="relative flex items-center w-24 h-8 mr-5">
           <Link href="/">
-            <a>
+            <a className="relative flex items-center w-24 h-8">
               <Image
                 src={Logo}
                 layout="fill"

@@ -7,7 +7,7 @@ import NearByImg from "../../../public/static/luca-bravo-O453M2Liufs-unsplash.jp
 
 const ExploreNearBy = () => {
   return (
-    <Box className="pb-2">
+    <Box className="pb-2 px-2">
       <h2 className="font-bold text-3xl py-3">{"Explore Nearby"}</h2>
       {/* Nearby Places Wrapper */}
       <Box
@@ -18,9 +18,9 @@ const ExploreNearBy = () => {
       >
         <Box className="group flex items-center w-max cursor-pointer">
           {/* Image Wrapper */}
-          <Box className="relative w-10 h-10 mr-2 rounded-lg overflow-hidden group-hover:scale-110 transition">
+          <div className="relative w-10 h-10 mr-2 rounded-lg overflow-hidden group-hover:scale-110 transition">
             <Image src={NearByImg} layout="fill" objectFit="cover" />
-          </Box>
+          </div>
           {/* Text Wrapper */}
           <Box>
             <p className="text-xs">NeigbourGoods Market</p>
@@ -45,8 +45,30 @@ const ExploreNearBy = () => {
           </Box>
           {/* Text Wrapper */}
           <Box>
-            <p className="text-xs">Mandela Bridge</p>
+            <p className="text-xs">Nelson Mandela Square</p>
             <p className="text-xs text-gray-400">20 minutes away</p>
+          </Box>
+        </Box>
+        <Box className="group flex items-center w-max cursor-pointer">
+          {/* Image Wrapper */}
+          <Box className="relative w-10 h-10 mr-2 rounded-lg overflow-hidden group-hover:scale-110 transition">
+            <Image src={NearByImg} layout="fill" objectFit="cover" />
+          </Box>
+          {/* Text Wrapper */}
+          <Box>
+            <p className="text-xs">Ghandi Square</p>
+            <p className="text-xs text-gray-400">22 minutes away</p>
+          </Box>
+        </Box>
+        <Box className="group flex items-center w-max cursor-pointer">
+          {/* Image Wrapper */}
+          <Box className="relative w-10 h-10 mr-2 rounded-lg overflow-hidden group-hover:scale-110 transition">
+            <Image src={NearByImg} layout="fill" objectFit="cover" />
+          </Box>
+          {/* Text Wrapper */}
+          <Box>
+            <p className="text-xs">Maboneng</p>
+            <p className="text-xs text-gray-400">35 minutes away</p>
           </Box>
         </Box>
       </Box>

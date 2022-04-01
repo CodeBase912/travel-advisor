@@ -3,10 +3,12 @@ module.exports = {
     "./pages/**/*.{js,jsx,ts,tsx}",
     "./components/**/*.{js,jsx,ts,tsx}",
   ],
+  // important: "#root",
   theme: {
     extend: {
       colors: {
         primary: "#FF385C",
+        "primary-dark": "#972439",
         secondary: "#FF385C",
         error: "#f00",
         grey: "#eee",
@@ -26,6 +28,9 @@ module.exports = {
         20: "100px",
         50: "300px",
         80: "400px",
+      },
+      minWidth: {
+        40: "10rem",
       },
     },
   },
