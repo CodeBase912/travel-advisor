@@ -7,6 +7,7 @@ import { Box, Button, Typography } from "@mui/material";
 import Header from "../components/site/header/Header";
 import ExploreNearBy from "../components/site/homePage/ExploreNearBy";
 import GoAnyWhere from "../components/site/homePage/GoAnyWhere";
+import Footer from "../components/site/Footer";
 // Import Images
 import HeroImage from "../public/static/stefan-stefancik-0wMmxNB6Xzc-unsplash.jpg";
 import FarrisWheelImg from "../public/static/jake-weirick-hieOkhzGyCE-unsplash.jpg";
@@ -15,7 +16,7 @@ const Home: NextPage = () => {
   return (
     <Box>
       <Header />
-      <main className="h-80 max-w-8xl m-auto mt-14">
+      <main className="max-w-8xl m-auto mt-14">
         {/* Hero Section */}
         <Box className="relative flex flex-col items-center justify-center w-full h-60p md:h-70p min-h-50">
           <Image
@@ -69,7 +70,7 @@ const Home: NextPage = () => {
 
         {/* Footer */}
       </main>
-      {/* <Footer /> */}
+      <Footer />
     </Box>
   );
 };
