@@ -8,7 +8,7 @@ import LogoWhite from "../../public/static/Logo_white.svg";
 
 const Footer: React.FC = () => {
   return (
-    <Box className="p-3 bg-primary text-white">
+    <footer className="p-3 bg-primary text-white">
       {/* Logo Wrapper */}
       <Box className="flex sm:justify-center my-5">
         <Link href="/">
@@ -39,7 +39,7 @@ const Footer: React.FC = () => {
               </Typography>
             </a>
           </Link>
-          <Link href="/">
+          <Link href="/become_a_tour_guide">
             <a>
               <Typography component="p" className="font-thin">
                 {"Become a tour guide"}
@@ -128,7 +128,7 @@ const Footer: React.FC = () => {
           className="font-thin text-xs"
         >{`All rights reserved`}</Typography>
       </Box>
-    </Box>
+    </footer>
   );
 };
 
