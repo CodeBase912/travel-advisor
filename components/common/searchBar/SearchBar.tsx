@@ -1,4 +1,5 @@
 import React from "react";
+import { useRouter } from "next/router";
 import { Controller, useForm, SubmitHandler } from "react-hook-form";
 // Import MaterialUI Components
 import { Box, Input, IconButton } from "@mui/material";
@@ -6,6 +7,8 @@ import { Box, Input, IconButton } from "@mui/material";
 import { Icons } from "../icons";
 
 const SearchBar = () => {
+  const router = useRouter();
+
   const methods = useForm({
     defaultValues: {
       search: "",
@@ -14,6 +17,16 @@ const SearchBar = () => {
 
   const onSubmit: SubmitHandler<any> = (data: any) => {
     console.log("Search submit data: ", data);
+
+    if (router.pathname !== "search") {
+      // Navigate to the places search page
+      router.push({
+        pathname: "search",
+        query: {
+          n: data.search,
+        },
+      });
+    }
   };
 
   return (

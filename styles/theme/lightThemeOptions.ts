@@ -7,7 +7,8 @@ const lightThemeOptions: ThemeOptions = {
       main: "#FF385C",
     },
     secondary: {
-      main: "#FF4DC4",
+      light: "#FFFFFF",
+      main: "#000000",
     },
   },
   components: {
