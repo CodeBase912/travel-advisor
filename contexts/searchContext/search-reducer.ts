@@ -5,6 +5,8 @@ import {
   UPDATE_SEARCH_TERM,
   UPDATE_SELECTED_CATEGORY,
   UPDATE_SELECTED_RATING,
+  UPDATE_MAP_COORDS,
+  UPDATE_USER_COORDS,
 } from "./search-context-actions";
 
 const searchReducer: (state: SearchState, action: Action) => SearchState = (
@@ -18,6 +20,10 @@ const searchReducer: (state: SearchState, action: Action) => SearchState = (
       return { ...state, selectedCategory: action.payload };
     case UPDATE_SELECTED_RATING:
       return { ...state, selectedRating: action.payload };
+    case UPDATE_MAP_COORDS:
+      return { ...state, mapCoords: action.payload };
+    case UPDATE_USER_COORDS:
+      return { ...state, userCoords: action.payload };
     default:
       return state;
   }

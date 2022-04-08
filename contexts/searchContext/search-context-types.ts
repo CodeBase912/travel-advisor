@@ -3,6 +3,8 @@ export type SearchState = {
   searchQuery: string;
   selectedCategory: string;
   selectedRating: string;
+  mapCoords: { lat: number; lng: number };
+  userCoords: { lat: number; lng: number };
 };
 
 export type Action = {

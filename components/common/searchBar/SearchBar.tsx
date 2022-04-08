@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import { Controller, useForm, SubmitHandler } from "react-hook-form";
 import SearchState, {
@@ -15,9 +15,16 @@ const SearchBar = () => {
 
   const methods = useForm({
     defaultValues: {
-      search: "",
+      search: state.searchQuery,
     },
   });
+
+  useEffect(() => {
+    if (router.query?.n) {
+      updateSearchQuery(router?.query?.n as string);
+      methods.setValue("search", router?.query?.n as string);
+    }
+  }, [router.query]);
 
   const onSubmit: SubmitHandler<any> = (data: any) => {
     console.log("Search submit data: ", data);
