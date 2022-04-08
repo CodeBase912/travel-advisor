@@ -16,6 +16,9 @@ module.exports = {
         error: "#f00",
         grey: "#eee",
       },
+      width: {
+        98: "410px",
+      },
       maxWidth: {
         "8xl": "1440px",
       },

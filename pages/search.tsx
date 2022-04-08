@@ -3,6 +3,8 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 // Import Google Maps Libraries
 import GoogleMapReact from "google-map-react";
+// Import Context & State Variables
+import SearchState from "../contexts/searchContext/SearchState";
 // Import MaterialUI Components
 import {
   Paper,
@@ -21,6 +23,7 @@ import LocationOulinedIcon from "@mui/icons-material/LocationCityOutlined";
 import Header from "../components/site/header/Header";
 import SelectInput from "../components/site/forms/inputs/SelectInput";
 import classNames from "classnames";
+import Map from "../components/site/searchPage/Map";
 
 const Search: NextPage = () => {
   const [showMap, setShowMap] = useState(true);
@@ -55,11 +58,11 @@ const Search: NextPage = () => {
   };
 
   return (
-    <>
+    <SearchState>
       <Header />
       <main className="flex flex-col h-screen w-screen pt-14 lg:flex-row max-w-8xl m-auto">
         {/* Search Filters */}
-        <Box component={"section"} className="p-2">
+        <Box component={"section"} className="p-2 lg:w-98">
           <Typography
             component="p"
             variant="h6"
@@ -97,7 +100,7 @@ const Search: NextPage = () => {
                 variant="outlined"
                 disableRipple
               >
-                View Map
+                {"View Map"}
               </Button>
               <Button
                 className={classNames("rounded-full", {
@@ -109,36 +112,16 @@ const Search: NextPage = () => {
                 variant="outlined"
                 disableRipple
               >
-                View List
+                {"View List"}
               </Button>
             </Box>
           </Box>
         </Box>
 
         {/* Map */}
-        <Box
-          component={"section"}
-          className={classNames("flex-1 w-full", {
-            hidden: !isDesktop && showMap === false, // Enable toggle show/hide map on mobile devices
-          })}
-        >
-          <GoogleMapReact
-            bootstrapURLKeys={{
-              key: process.env.NEXT_PUBLIC_API_KEY
-                ? process.env.NEXT_PUBLIC_API_KEY
-                : "",
-            }}
-            defaultCenter={coordinates}
-            center={coordinates}
-            defaultZoom={15}
-            // margin={[50, 50, 50, 50]}
-            // options={""}
-            // onChange={() => {}}
-            // onChildClick={() => {}}
-          ></GoogleMapReact>
-        </Box>
+        <Map showMap={showMap} />
       </main>
-    </>
+    </SearchState>
   );
 };
 
