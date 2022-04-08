@@ -22,6 +22,7 @@ const Header: React.FC = () => {
                 layout="fill"
                 objectFit="contain"
                 objectPosition="left"
+                priority
               />
             </a>
           </Link>

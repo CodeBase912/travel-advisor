@@ -12,14 +12,14 @@ type Props = {
 };
 
 const Map: React.FC<Props> = ({ showMap }) => {
-  const { isDesktop } = useContext(SearchContext);
+  const { state } = useContext(SearchContext);
   const coordinates = { lat: 0, lng: 0 };
 
   return (
     <Box
       component={"section"}
       className={classNames("flex-1 w-full", {
-        hidden: !isDesktop && showMap === false, // Enable toggle show/hide map on mobile devices
+        hidden: !state.isDesktop && showMap === false, // Enable toggle show/hide map on mobile devices
       })}
     >
       <GoogleMapReact
