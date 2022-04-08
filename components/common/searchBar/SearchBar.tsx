@@ -13,11 +13,7 @@ const SearchBar = () => {
   const router = useRouter();
   const { state, updateSearchQuery } = useContext(SearchContext);
 
-  const methods = useForm({
-    defaultValues: {
-      search: state.searchQuery,
-    },
-  });
+  const methods = useForm({});
 
   useEffect(() => {
     if (router.query?.n) {
@@ -30,7 +26,7 @@ const SearchBar = () => {
     console.log("Search submit data: ", data);
 
     // Update Search Context's SearchQuery property
-    updateSearchQuery(data.search);
+    router.query?.n && updateSearchQuery(data.search);
 
     if (router.pathname !== "search") {
       // Navigate to the places search page
