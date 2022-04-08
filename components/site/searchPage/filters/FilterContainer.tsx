@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useRouter } from "next/router";
+import React, { useContext } from "react";
 import classNames from "classnames";
 // Import Context & State Variables
 import SearchState, {
@@ -21,6 +20,7 @@ import {
 import LocationOulinedIcon from "@mui/icons-material/LocationCityOutlined";
 // Import Custom React Components
 import SelectInput from "../../forms/inputs/SelectInput";
+import filterOptions from "./filter-options";
 
 type Props = {
   showMap: boolean;
@@ -28,70 +28,60 @@ type Props = {
 };
 
 const FilterContainer: React.FC<Props> = ({ showMap, setShowMap }) => {
-  const { state, updateSearchQuery } = useContext(SearchContext);
-  const router = useRouter();
-  const [categoryOption, setCategoryOption] = useState("attractions");
-  const [ratingOption, setRatingOption] = useState("0");
+  const { state, updateSelectedCategory, updateSelectedRating } =
+    useContext(SearchContext);
 
-  useEffect(() => {
-    if (router.query) {
-      updateSearchQuery(router.query as never);
-    }
-  }, []);
-
-  console.log("Search query: ", state.searchQuery);
-
-  const categoryOptions = [
-    { value: "attractions", displayText: "Attractions" },
-    { value: "restaurants", displayText: "Restaurants" },
-    { value: "hotels", displayText: "Hotels" },
-  ];
-
-  const ratingOptions = [
-    { value: "0", displayText: "All" },
-    { value: "3", displayText: "Above 3.0" },
-    { value: "4", displayText: "Above 4.0" },
-    { value: "4.5", displayText: "Above 4.5" },
-  ];
+  // ----------------------------------------------------------
+  //  Handle onChange Events for the SelectInput Components
+  // ----------------------------------------------------------
 
   const onCategoryChange: React.EventHandler<any> = (e) => {
     console.log("New Value: ", e.target.value);
-    setCategoryOption(e.target.value);
+    updateSelectedCategory(e.target.value);
   };
 
   const onRatingChange: React.EventHandler<any> = (e) => {
     console.log("New Value: ", e.target.value);
-    setRatingOption(e.target.value);
+    updateSelectedRating(e.target.value);
   };
+
+  // ----------------------------------------------------------
+  //  Render Component
+  // ----------------------------------------------------------
 
   return (
     <Box component={"section"} className="p-2 lg:w-98">
+      {/* Filter Container Header */}
       <Typography
         component="p"
         variant="h6"
         className="text-lg lg:px-3 lg:pt-3"
       >
-        {router.query?.n
-          ? `Showing results for "${router.query.n}"`
+        {state.searchQuery
+          ? `Showing results for "${state.searchQuery}"`
           : "Attractions, Restaurants & Hotels around you"}
       </Typography>
+
       <Box className="flex flex-col justify-between md:flex-row md:items-center lg:px-3">
+        {/* Filters Wrapper */}
         <Box className="flex gap-3 py-3 w-full max-w-sm">
           <SelectInput
             label="Category"
-            value={categoryOption}
-            defaultValue={categoryOption}
-            options={categoryOptions}
+            value={state.selectedCategory}
+            defaultValue={state.selectedCategory}
+            options={filterOptions.categoryOptions}
             onChange={onCategoryChange}
           />
           <SelectInput
             label="Rating"
-            value={ratingOption}
-            defaultValue={ratingOption}
-            options={ratingOptions}
+            value={state.selectedRating}
+            defaultValue={state.selectedRating}
+            options={filterOptions.ratingsOptions}
             onChange={onRatingChange}
           />
         </Box>
+
+        {/* Map/List View Toggler Container */}
         <Box className="space-x-3 pb-1 lg:hidden">
           <Button
             className={classNames("rounded-full", {

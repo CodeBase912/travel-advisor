@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useRouter } from "next/router";
 import { Controller, useForm, SubmitHandler } from "react-hook-form";
+import SearchState, {
+  SearchContext,
+} from "../../../contexts/searchContext/SearchState";
 // Import MaterialUI Components
 import { Box, Input, IconButton } from "@mui/material";
 // Import Custom React Components
@@ -8,6 +11,7 @@ import { Icons } from "../icons";
 
 const SearchBar = () => {
   const router = useRouter();
+  const { state, updateSearchQuery } = useContext(SearchContext);
 
   const methods = useForm({
     defaultValues: {
@@ -17,6 +21,9 @@ const SearchBar = () => {
 
   const onSubmit: SubmitHandler<any> = (data: any) => {
     console.log("Search submit data: ", data);
+
+    // Update Search Context's SearchQuery property
+    updateSearchQuery(data.search);
 
     if (router.pathname !== "search") {
       // Navigate to the places search page
@@ -44,13 +51,14 @@ const SearchBar = () => {
             formState,
           }) => (
             <Input
+              name={name}
               value={value}
               placeholder={"Search for places to see"}
               disableUnderline
               className="w-full text-gray-600 mr-3"
-              {...methods.register("search")}
+              onChange={onChange}
+              // {...methods.register("search")}
               // onBlur={onBlur} // notify when input is touched
-              // onChange={onChange} // send value to hook form
               // inputRef={ref}
             />
           )}

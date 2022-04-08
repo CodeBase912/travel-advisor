@@ -1,7 +1,8 @@
 import React from "react";
 import Image from "next/image";
+// Import Context & State Variables
 // Import MaterialUI Components
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 // Import Custom React Components
 import SearchBar from "../../common/searchBar/SearchBar";
 // Import Logo
