@@ -3,24 +3,17 @@ import Image from "next/image";
 import Link from "next/link";
 // Import MaterialUI Components
 import { Box, Typography } from "@mui/material";
+// Import Custom React Components
+import Logo from "./Logo";
 // Import Logo
 import LogoWhite from "../../public/static/Logo_white.svg";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="p-3 bg-primary text-white">
+    <footer className="p-3 bg-secondary text-white">
       {/* Logo Wrapper */}
       <Box className="flex sm:justify-center my-5">
-        <Link href="/">
-          <a className="relative flex items-center w-24 h-10">
-            <Image
-              src={LogoWhite}
-              layout="fill"
-              objectFit="contain"
-              objectPosition="left"
-            />
-          </a>
-        </Link>
+        <Logo size="xl" />
       </Box>
       {/* Footer Links Wrapper */}
       <Box className="grid gap-3 sm:place-items-center sm:text-center grid-cols-2 md:grid-cols-3 lg:flex lg:justify-around lg:max-w-5xl m-auto">

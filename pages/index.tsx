@@ -30,7 +30,7 @@ const Home: NextPage = () => {
               {"Not sure where to go? Perfect."}
             </Typography>
             <Button
-              className="bg-primary rounded-full active:bg-primary-dark"
+              className="text-white bg-primary rounded-full active:bg-primary-dark"
               variant="contained"
               disableElevation
               disableRipple

@@ -12,9 +12,9 @@ const GoAnyWhere = () => {
     <div>
       <h2 className="font-bold text-3xl pt-3 px-2">{"Go Anywhere"}</h2>
       {/* Categories */}
-      <Box className="flex items-center gap-5 pl-3 py-5 pb-3 overflow-x-auto overflow-y-hidden w-full">
-        <Box className="group hover:scale-105 transition w-full min-w-40">
-          <Box className="relative h-80 w-full rounded-lg overflow-hidden">
+      <Box className="flex items-center gap-5 pl-3 py-5 pb-3 overflow-x-auto overflow-y-hidden w-full no-scrollbar">
+        <Box className="group hover:scale-105 hover:shadow-2xl transition duration-300 cursor-pointer w-full min-w-40 rounded-lg overflow-hidden shadow-lg">
+          <Box className="relative h-60 w-full">
             <Image
               src={TentImg}
               layout="fill"
@@ -22,12 +22,18 @@ const GoAnyWhere = () => {
               className="group-hover:scale-125 transition duration-300"
             />
           </Box>
-          <Typography component="p" className="text-black text-lg">
-            {"See Attractions"}
-          </Typography>
+
+          <Box className="text-black py-5 px-3">
+            <Typography component="p" className="text-sm">
+              {"See Attractions"}
+            </Typography>
+            <Typography component="p" className="text-sm font-thin">
+              {"140 near you"}
+            </Typography>
+          </Box>
         </Box>
-        <Box className="group hover:scale-105 transition w-full min-w-40">
-          <Box className="relative h-80 w-full rounded-lg overflow-hidden">
+        <Box className="group hover:scale-105 hover:shadow-2xl transition duration-300 cursor-pointer w-full min-w-40 rounded-lg overflow-hidden shadow-lg">
+          <Box className="relative h-60 w-full">
             <Image
               src={BoyWithBagImg}
               layout="fill"
@@ -36,12 +42,17 @@ const GoAnyWhere = () => {
             />
           </Box>
 
-          <Typography component="p" className="text-black text-lg">
-            {"Restuarants"}
-          </Typography>
+          <Box className="text-black py-5 px-3">
+            <Typography component="p" className="text-sm">
+              {"Restaurants"}
+            </Typography>
+            <Typography component="p" className="text-sm font-thin">
+              {"120 near you"}
+            </Typography>
+          </Box>
         </Box>
-        <Box className="group hover:scale-105 transition w-full min-w-40 mr-2 md:mr-5">
-          <Box className="relative h-80 w-full rounded-lg overflow-hidden">
+        <Box className="group hover:scale-105 hover:shadow-2xl transition duration-300 cursor-pointer w-full min-w-40 rounded-lg overflow-hidden shadow-lg">
+          <Box className="relative h-60 w-full">
             <Image
               src={BoatImg}
               layout="fill"
@@ -49,9 +60,14 @@ const GoAnyWhere = () => {
               className="group-hover:scale-125 transition duration-300"
             />
           </Box>
-          <Typography component="p" className="text-black text-lg">
-            {"Hotels"}
-          </Typography>
+          <Box className="text-black py-5 px-3">
+            <Typography component="p" className="text-sm">
+              {"Hotels"}
+            </Typography>
+            <Typography component="p" className="text-sm font-thin">
+              {"112 near you"}
+            </Typography>
+          </Box>
         </Box>
       </Box>
     </div>

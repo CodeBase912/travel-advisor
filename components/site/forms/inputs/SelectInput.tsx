@@ -45,7 +45,7 @@ const SelectInput: React.FC<Props> = ({
         sx={{
           ".MuiSelect-icon": {
             fill: "#FFF",
-            background: "#FF385C",
+            background: "#FF9100",
             borderRadius: "100%",
             right: "0.5rem",
           },

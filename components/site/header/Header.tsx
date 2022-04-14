@@ -2,11 +2,11 @@ import React from "react";
 import Image from "next/image";
 // Import Context & State Variables
 // Import MaterialUI Components
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 // Import Custom React Components
+import Logo from "../Logo";
 import SearchBar from "../../common/searchBar/SearchBar";
 // Import Logo
-import Logo from "../../../public/static/Logo.svg";
 import Link from "next/link";
 
 const Header: React.FC = () => {
@@ -15,18 +15,8 @@ const Header: React.FC = () => {
       {/* Header Content Wrapepr */}
       <Box className="max-w-8xl w-full flex sm:grid sm:grid-cols-2 items-center">
         {/* Logo Wrapper */}
-        <Box className="relative flex items-center w-24 h-8 mr-5">
-          <Link href="/">
-            <a className="relative flex items-center w-24 h-8">
-              <Image
-                src={Logo}
-                layout="fill"
-                objectFit="contain"
-                objectPosition="left"
-                priority
-              />
-            </a>
-          </Link>
+        <Box className="relative flex items-center w-24 h-8 mr-8">
+          <Logo to="/" size="2xl" />
         </Box>
 
         {/* Search Bar Wrapper */}
