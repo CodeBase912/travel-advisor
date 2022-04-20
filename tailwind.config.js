@@ -9,6 +9,10 @@ module.exports = {
       screens: {
         xs: "320px",
       },
+      breakPoints: {
+        xxs: "(max-width: 300px)",
+        "2xs": "350px",
+      },
       colors: {
         // primary: "#FF385C",
         // secondary: "#FF385C",

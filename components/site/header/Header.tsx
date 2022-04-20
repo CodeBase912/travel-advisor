@@ -15,7 +15,7 @@ const Header: React.FC = () => {
       {/* Header Content Wrapepr */}
       <Box className="max-w-8xl w-full flex sm:grid sm:grid-cols-2 items-center">
         {/* Logo Wrapper */}
-        <Box className="relative flex items-center w-24 h-8 mr-8">
+        <Box className="relative flex items-center w-24 h-8 mr-8 text-secondary">
           <Logo to="/" size="2xl" />
         </Box>
 

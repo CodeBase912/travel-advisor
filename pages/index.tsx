@@ -7,7 +7,7 @@ import { Box, Button, Typography } from "@mui/material";
 import Header from "../components/site/header/Header";
 import ExploreNearBy from "../components/site/homePage/ExploreNearBy";
 import GoAnyWhere from "../components/site/homePage/GoAnyWhere";
-import Footer from "../components/site/Footer";
+import Footer from "../components/site/footer/Footer";
 // Import Images
 import HeroImage from "../public/static/stefan-stefancik-0wMmxNB6Xzc-unsplash.jpg";
 import FarrisWheelImg from "../public/static/jake-weirick-hieOkhzGyCE-unsplash.jpg";

@@ -14,5 +14,9 @@
       -ms-overflow-style: none; /* IE and Edge */
       scrollbar-width: none; /* Firefox */
     }
+
+    .grid-temp-cols {
+      grid-template-columns: repeat(auto-fit, minmax(170px, 0.5fr));
+    }
   }
 }
