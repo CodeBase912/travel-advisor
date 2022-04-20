@@ -21,13 +21,19 @@ import LocationOulinedIcon from "@mui/icons-material/LocationCityOutlined";
 // Import Custom React Components
 import SelectInput from "../../forms/inputs/SelectInput";
 import filterOptions from "./filter-options";
+import PlacesList from "../PlacesList";
 
 type Props = {
   showMap: boolean;
+  showList: boolean;
   setShowMap: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const FilterContainer: React.FC<Props> = ({ showMap, setShowMap }) => {
+const FilterContainer: React.FC<Props> = ({
+  showMap,
+  showList,
+  setShowMap,
+}) => {
   const { state, updateSelectedCategory, updateSelectedRating } =
     useContext(SearchContext);
 
@@ -109,6 +115,9 @@ const FilterContainer: React.FC<Props> = ({ showMap, setShowMap }) => {
           </Button>
         </Box>
       </Box>
+
+      {/* List */}
+      <PlacesList showList={showList} />
     </Box>
   );
 };

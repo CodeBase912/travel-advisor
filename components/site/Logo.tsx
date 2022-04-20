@@ -7,22 +7,32 @@ import { Box, Typography } from "@mui/material";
 type Props = {
   size?: "sm" | "md" | "lg" | "xl" | "2xl";
   to?: string;
+  responsive?: boolean;
 };
 
-const Logo: React.FC<Props> = ({ size = "md", to = "/" }) => {
+const Logo: React.FC<Props> = ({
+  size = "md",
+  to = "/",
+  responsive = false,
+}) => {
   return (
     <Link href={to}>
-      <a>
+      <a className="p-0 m-0 w-fit">
         <Box className="relative">
           <Typography
             component="h1"
             className={classNames(
               "font-bold",
-              { "text-sm": size === "sm" },
-              { "text-md": size === "md" },
-              { "text-lg": size === "lg" },
-              { "text-xl": size === "xl" },
-              { "text-2xl": size === "2xl" }
+              `text-${size}`,
+
+              // { "text-sm": size === "sm" },
+              // { "text-md": size === "md" },
+              // { "text-xl": size === "xl" },
+              // { "text-2xl": size === "2xl" },
+              {
+                "text-md sm:text-md md:text-xl lg:text-2xl":
+                  responsive === true,
+              }
             )}
           >
             Xplore

@@ -39,6 +39,10 @@ module.exports = {
       },
       minWidth: {
         40: "10rem",
+        28: "7rem",
+      },
+      fontSize: {
+        xxs: "0.5rem",
       },
     },
   },
