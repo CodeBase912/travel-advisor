@@ -56,7 +56,7 @@ const FilterContainer: React.FC<Props> = ({
   // ----------------------------------------------------------
 
   return (
-    <Box component={"section"} className="p-2 lg:w-98">
+    <Box component={"section"} className="p-2 lg:w-98 x-shadow z-10">
       {/* Filter Container Header */}
       <Typography
         component="p"

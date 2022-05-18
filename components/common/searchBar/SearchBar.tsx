@@ -8,6 +8,7 @@ import SearchState, {
 import { Box, Input, IconButton } from "@mui/material";
 // Import Custom React Components
 import { Icons } from "../icons";
+import { Autocomplete } from "@react-google-maps/api";
 
 const SearchBar = () => {
   const router = useRouter();
@@ -41,6 +42,7 @@ const SearchBar = () => {
 
   return (
     <Box className="border border-gray-400 py-1 pl-3 pr-1 rounded-full w-full md:max-w-sm">
+      {/* <Autocomplete> */}
       <form
         onSubmit={methods.handleSubmit(onSubmit)}
         className="flex items-center"
@@ -74,6 +76,7 @@ const SearchBar = () => {
           {Icons.search}
         </IconButton>
       </form>
+      {/* </Autocomplete> */}
     </Box>
   );
 };

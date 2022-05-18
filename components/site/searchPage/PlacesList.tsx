@@ -9,11 +9,18 @@ import { Icons } from "../../common/icons";
 
 type Props = {
   showList?: boolean;
+  isDesktop?: boolean;
 };
 
-const PlacesList: React.FC<Props> = ({ showList = true }) => {
+const PlacesList: React.FC<Props> = ({ showList = true, isDesktop }) => {
   return (
-    <Box className={classNames("p-2", { hidden: showList === false })}>
+    <Box
+      className={classNames(
+        "p-2 ",
+        { hidden: showList === false },
+        { absolute: isDesktop === true }
+      )}
+    >
       PlacesList
       {/* List Items */}
       <Box className="flex rounded-lg overflow-hidden shadow-lg cursor-pointer">

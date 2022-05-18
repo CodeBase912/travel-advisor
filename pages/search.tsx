@@ -19,7 +19,7 @@ const Search: NextPage = () => {
   return (
     <SearchState>
       <Header />
-      <main className="flex flex-col h-screen w-screen pt-14 lg:flex-row max-w-8xl m-auto">
+      <main className="relative flex flex-col h-screen w-screen pt-14 lg:flex-row m-auto">
         {/* Search Filters */}
         <FilterContainer
           showMap={showMap}
@@ -31,7 +31,7 @@ const Search: NextPage = () => {
         <Map showMap={isDesktop ? true : showMap} />
 
         {/* List */}
-        <PlacesList showList={isDesktop ? false : !showMap} />
+        <PlacesList showList={isDesktop ? false : true} isDesktop={isDesktop} />
       </main>
     </SearchState>
   );

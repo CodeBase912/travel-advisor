@@ -7,6 +7,7 @@ import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 // Import MaterialUI COmponents
 import { Box } from "@mui/material";
 import Header from "../components/site/header/Header";
+import Footer from "../components/site/footer/Footer";
 
 const schema = yup
   .object()
@@ -44,13 +45,14 @@ const TourGuideSIgnUp: NextPage = () => {
   };
 
   return (
-    <Box>
+    <Box className="h-screen flex flex-col">
       <Header />
-      <Box className="mt-20">
+      <main className="pt-20 h-full">
         <FormProvider {...methods}>
           <form onSubmit={formSubmit}>become_a_tour_guide</form>
         </FormProvider>
-      </Box>
+      </main>
+      <Footer />
     </Box>
   );
 };

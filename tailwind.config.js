@@ -7,6 +7,8 @@ module.exports = {
   theme: {
     extend: {
       screens: {
+        "tiny-mobile": "250px",
+        "xs-mobile": "300px",
         xs: "320px",
       },
       breakPoints: {
