@@ -23,10 +23,10 @@ const PlacesList: React.FC<Props> = ({ showList = true, isDesktop }) => {
     >
       PlacesList
       {/* List Items */}
-      <Box className="flex rounded-lg overflow-hidden shadow-lg cursor-pointer">
+      <Box className="flex flex-col rounded-lg overflow-hidden shadow-lg cursor-pointer">
         {/* Image Wrapper */}
-        <Box className="relative w-28 min-w-28 h-28">
-          <Image src={placeImg} layout="fill" />
+        <Box className="relative object-contain w-full min-w-28 h-48">
+          <Image src={placeImg} layout="fill" objectFit="cover" />
         </Box>
         {/* Content Wrapper */}
         <Box className="py-2 px-5 w-full space-y-1">
