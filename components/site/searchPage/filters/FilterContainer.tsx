@@ -1,4 +1,11 @@
-import React, { useContext } from "react";
+import React, {
+  RefObject,
+  MutableRefObject,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import classNames from "classnames";
 // Import Context & State Variables
 import SearchState, {
@@ -16,12 +23,14 @@ import {
   MenuItem,
   FormControl,
   Button,
+  IconButton,
 } from "@mui/material";
 import LocationOulinedIcon from "@mui/icons-material/LocationCityOutlined";
 // Import Custom React Components
 import SelectInput from "../../forms/inputs/SelectInput";
 import filterOptions from "./filter-options";
 import PlacesList from "../PlacesList";
+import { Icons } from "../../../common/icons";
 
 type Props = {
   showMap: boolean;
@@ -36,6 +45,15 @@ const FilterContainer: React.FC<Props> = ({
 }) => {
   const { state, updateSelectedCategory, updateSelectedRating } =
     useContext(SearchContext);
+  const [showFilters, setShowFilters] = useState(true);
+  const searchResultsRef = useRef(null);
+
+  useEffect(() => {
+    console.log("searchResultsRef: ", searchResultsRef);
+    //@ts-ignore
+    console.log("Height: ", searchResultsRef.current.offsetHeight);
+    console.log("state: ", state);
+  }, [searchResultsRef?.current]);
 
   // ----------------------------------------------------------
   //  Handle onChange Events for the SelectInput Components
@@ -60,72 +78,111 @@ const FilterContainer: React.FC<Props> = ({
       component={"section"}
       className="relative md:p-2 lg:w-98 x-shadow z-10"
     >
-      {/* Filter Container Header */}
-      <Typography
-        component="p"
-        variant="h6"
-        className="text-lg lg:px-3 lg:pt-3 hidden md:flex"
+      <Box
+        className={classNames(
+          "absolute -bottom-[62.5px] left-0 p-2 w-full md:bg-white lg:relative lg:p-0",
+          "transition-position ease-in-out duration-500",
+          {
+            "relative top-0": !showFilters,
+          }
+        )}
       >
-        {state.searchQuery
-          ? `Showing results for "${state.searchQuery}"`
-          : "Attractions, Restaurants & Hotels around you"}
-      </Typography>
-
-      <Box className="flex flex-col justify-between md:flex-row md:items-center lg:px-3">
-        {/* Filters Wrapper */}
-        <Box className="hidden md:flex gap-3 py-3 w-full max-w-sm">
-          <SelectInput
-            label="Category"
-            value={state.selectedCategory}
-            defaultValue={state.selectedCategory}
-            options={filterOptions.categoryOptions}
-            onChange={onCategoryChange}
-          />
-          <SelectInput
-            label="Rating"
-            value={state.selectedRating}
-            defaultValue={state.selectedRating}
-            options={filterOptions.ratingsOptions}
-            onChange={onRatingChange}
-          />
-        </Box>
-
-        {/* Map/List View Toggler Container */}
-        <Box className="space-x-3 pb-1 lg:hidden absolute top-3 left-2 md:relative">
-          <Button
-            className={classNames("rounded-full", {
-              "bg-primary hover:bg-primary text-white shadow-lg shadow-gray-400 md:shadow-none":
-                showMap,
-            })}
-            onClick={() => {
-              setShowMap(true);
-            }}
-            variant="outlined"
-            disableRipple
-          >
-            {"View Map"}
-          </Button>
-          <Button
+        {/* Search Results Header */}
+        <Typography
+          component="p"
+          variant="h6"
+          className={classNames(
+            "text-lg pr-10 md:pr-0 lg:px-3 lg:pt-3 md:flex"
+            // {
+            //   hidden: showFilters,
+            // }
+          )}
+          ref={searchResultsRef}
+        >
+          {state.searchQuery
+            ? `Showing results for "${state.searchQuery}"`
+            : "Attractions, Restaurants & Hotels near you"}
+        </Typography>
+        <Box className="flex flex-col w-full justify-between md:flex-row md:items-center lg:px-3">
+          {/* Filters Wrapper */}
+          <Box
             className={classNames(
-              "rounded-full",
+              "flex flex-col md:flex-row gap-3 py-3 w-full max-w-sm",
               {
-                "bg-primary hover:bg-primary text-white": !showMap,
-              },
-              {
-                "bg-white border-0 hover:border-0 md:border-1 hover:bg-slate-50 text-primary shadow-lg shadow-gray-400 md:shadow-none":
-                  showMap,
+                // hidden: showFilters,
               }
             )}
-            onClick={() => {
-              setShowMap(false);
-            }}
-            variant="outlined"
-            disableRipple
           >
-            {"View List"}
-          </Button>
+            <SelectInput
+              label="Category"
+              value={state.selectedCategory}
+              defaultValue={state.selectedCategory}
+              options={filterOptions.categoryOptions}
+              onChange={onCategoryChange}
+            />
+            <SelectInput
+              label="Rating"
+              value={state.selectedRating}
+              defaultValue={state.selectedRating}
+              options={filterOptions.ratingsOptions}
+              onChange={onRatingChange}
+            />
+          </Box>
+
+          {/* Map/List View Toggler Container */}
+          <Box className="flex justify-start md:justify-end w-[95vw] pb-1 lg:hidden p-3 top-3 left-2 md:relative md:top-0 md:left-0">
+            <Button
+              className={classNames("rounded-full mr-3", {
+                "bg-primary hover:bg-primary text-white shadow-lg shadow-gray-400 md:shadow-none":
+                  showMap,
+              })}
+              onClick={() => {
+                setShowMap(true);
+              }}
+              variant="outlined"
+              disableRipple
+            >
+              {"View Map"}
+            </Button>
+            <Button
+              className={classNames(
+                "rounded-full",
+                {
+                  "bg-primary hover:bg-primary text-white": !showMap,
+                },
+                {
+                  "bg-white border-0 hover:border-0 md:border-2 md:hover:border-2 hover:bg-slate-50 text-primary shadow-lg shadow-gray-400 md:shadow-none":
+                    showMap,
+                }
+              )}
+              onClick={() => {
+                setShowMap(false);
+              }}
+              variant="outlined"
+              disableRipple
+            >
+              {"View List"}
+            </Button>
+          </Box>
         </Box>
       </Box>
+      <IconButton
+        className={classNames(
+          "absolute top-[10px] w-[40px] h-[40px] right-2 ml-auto rounded-full md:hidden",
+          "bg-white text-primary text-[16px] hover:bg-white shadow-lg shadow-gray-400",
+          {
+            "shadow-none": !showMap,
+          },
+          {
+            "text-[20px] shadow-none": !showFilters,
+          }
+        )}
+        disableRipple
+        title="Show search filters"
+        onClick={() => setShowFilters(!showFilters)}
+      >
+        {showFilters ? Icons.filter : Icons.close}
+      </IconButton>
 
       {/* List */}
       <PlacesList showList={showList} />
