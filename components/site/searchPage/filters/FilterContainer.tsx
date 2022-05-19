@@ -56,12 +56,15 @@ const FilterContainer: React.FC<Props> = ({
   // ----------------------------------------------------------
 
   return (
-    <Box component={"section"} className="p-2 lg:w-98 x-shadow z-10">
+    <Box
+      component={"section"}
+      className="relative md:p-2 lg:w-98 x-shadow z-10"
+    >
       {/* Filter Container Header */}
       <Typography
         component="p"
         variant="h6"
-        className="text-lg lg:px-3 lg:pt-3"
+        className="text-lg lg:px-3 lg:pt-3 hidden md:flex"
       >
         {state.searchQuery
           ? `Showing results for "${state.searchQuery}"`
@@ -70,7 +73,7 @@ const FilterContainer: React.FC<Props> = ({
 
       <Box className="flex flex-col justify-between md:flex-row md:items-center lg:px-3">
         {/* Filters Wrapper */}
-        <Box className="flex gap-3 py-3 w-full max-w-sm">
+        <Box className="hidden md:flex gap-3 py-3 w-full max-w-sm">
           <SelectInput
             label="Category"
             value={state.selectedCategory}
@@ -88,10 +91,11 @@ const FilterContainer: React.FC<Props> = ({
         </Box>
 
         {/* Map/List View Toggler Container */}
-        <Box className="space-x-3 pb-1 lg:hidden">
+        <Box className="space-x-3 pb-1 lg:hidden absolute top-3 left-2 md:relative">
           <Button
             className={classNames("rounded-full", {
-              "bg-primary hover:bg-primary text-white": showMap,
+              "bg-primary hover:bg-primary text-white shadow-lg shadow-gray-400 md:shadow-none":
+                showMap,
             })}
             onClick={() => {
               setShowMap(true);
@@ -102,9 +106,16 @@ const FilterContainer: React.FC<Props> = ({
             {"View Map"}
           </Button>
           <Button
-            className={classNames("rounded-full", {
-              "bg-primary hover:bg-primary text-white": !showMap,
-            })}
+            className={classNames(
+              "rounded-full",
+              {
+                "bg-primary hover:bg-primary text-white": !showMap,
+              },
+              {
+                "bg-white border-0 hover:border-0 md:border-1 hover:bg-slate-50 text-primary shadow-lg shadow-gray-400 md:shadow-none":
+                  showMap,
+              }
+            )}
             onClick={() => {
               setShowMap(false);
             }}

@@ -17,6 +17,9 @@ const Map: React.FC<Props> = ({ showMap }) => {
   const [getCoordsErrorMessage, setGetCoordsErrorMessage] = useState("");
 
   const defaultLocation = { lat: 51.507351, lng: -0.127758 }; // London, UK
+  const defaultMapOptions = {
+    fullscreenControl: false,
+  };
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -75,9 +78,9 @@ const Map: React.FC<Props> = ({ showMap }) => {
         center={state.mapCoords}
         defaultZoom={15}
         // margin={[50, 50, 50, 50]}
-        // options={""}
         // onChange={() => {}}
         // onChildClick={() => {}}
+        options={defaultMapOptions}
       ></GoogleMapReact>
     </Box>
   );

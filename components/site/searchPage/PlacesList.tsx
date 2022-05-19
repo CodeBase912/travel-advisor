@@ -16,12 +16,13 @@ const PlacesList: React.FC<Props> = ({ showList = true, isDesktop }) => {
   return (
     <Box
       className={classNames(
-        "p-2 ",
+        "p-2",
         { hidden: showList === false },
+        { "pt-16 md:pt-2": showList === true },
         { absolute: isDesktop === true }
       )}
     >
-      PlacesList
+      {/* PlacesList */}
       {/* List Items */}
       <Box className="flex flex-col rounded-lg overflow-hidden shadow-lg cursor-pointer">
         {/* Image Wrapper */}
