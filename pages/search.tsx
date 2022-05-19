@@ -10,6 +10,7 @@ import FilterContainer from "../components/site/searchPage/filters/FilterContain
 import Map from "../components/site/searchPage/Map";
 import PlacesList from "../components/site/searchPage/PlacesList";
 import MobileList from "../components/site/searchPage/MobileList";
+import SpringComp from "../components/site/searchPage/filters/Spring";
 
 const Search: NextPage = () => {
   const [showMap, setShowMap] = useState(true);
@@ -52,11 +53,13 @@ const Search: NextPage = () => {
         <Map showMap={isDesktop ? true : showMap} />
 
         {/* List */}
-        <MobileList showList={isDesktop ? false : showMap} />
+        {/* <MobileList showList={isDesktop ? false : showMap} />
         <PlacesList
           showList={isDesktop ? false : !showMap}
           isDesktop={isDesktop}
-        />
+        /> */}
+
+        <SpringComp />
       </main>
     </SearchState>
   );
