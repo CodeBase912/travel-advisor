@@ -53,13 +53,13 @@ const Search: NextPage = () => {
         <Map showMap={isDesktop ? true : showMap} />
 
         {/* List */}
-        {/* <MobileList showList={isDesktop ? false : showMap} />
+        <MobileList showList={isDesktop ? false : showMap} />
         <PlacesList
           showList={isDesktop ? false : !showMap}
           isDesktop={isDesktop}
-        /> */}
+        />
 
-        <SpringComp />
+        {/* <SpringComp /> */}
       </main>
     </SearchState>
   );

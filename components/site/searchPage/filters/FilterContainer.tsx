@@ -31,6 +31,7 @@ import SelectInput from "../../forms/inputs/SelectInput";
 import filterOptions from "./filter-options";
 import PlacesList from "../PlacesList";
 import { Icons } from "../../../common/icons";
+import SpringComp from "./Spring";
 
 type Props = {
   showMap: boolean;
@@ -45,7 +46,7 @@ const FilterContainer: React.FC<Props> = ({
 }) => {
   const { state, updateSelectedCategory, updateSelectedRating } =
     useContext(SearchContext);
-  const [showFilters, setShowFilters] = useState(true);
+  const [showFilters, setShowFilters] = useState(false);
   const searchResultsRef = useRef(null);
 
   useEffect(() => {
@@ -76,15 +77,15 @@ const FilterContainer: React.FC<Props> = ({
   return (
     <Box
       component={"section"}
-      className="relative md:p-2 lg:w-98 x-shadow z-10"
+      className="relative md:p-2 lg:w-98 lg:x-shadow z-10"
     >
       <Box
         className={classNames(
-          "absolute -bottom-[62.5px] left-0 p-2 w-full md:bg-white lg:relative lg:p-0",
-          "transition-position ease-in-out duration-500",
-          {
-            "relative top-0": !showFilters,
-          }
+          "absolute md:relative left-0 p-2 w-full lg:relative lg:p-0 shadow-none",
+          "transition-position ease-in-out duration-500"
+          // {
+          //   "relative top-0": !showFilters,
+          // }
         )}
       >
         {/* Search Results Header */}
@@ -92,10 +93,7 @@ const FilterContainer: React.FC<Props> = ({
           component="p"
           variant="h6"
           className={classNames(
-            "text-lg pr-10 md:pr-0 lg:px-3 lg:pt-3 md:flex"
-            // {
-            //   hidden: showFilters,
-            // }
+            "text-lg hidden pr-10 md:pr-0 lg:px-3 lg:pt-3 md:flex"
           )}
           ref={searchResultsRef}
         >
@@ -103,11 +101,71 @@ const FilterContainer: React.FC<Props> = ({
             ? `Showing results for "${state.searchQuery}"`
             : "Attractions, Restaurants & Hotels near you"}
         </Typography>
-        <Box className="flex flex-col w-full justify-between md:flex-row md:items-center lg:px-3">
+        <Box className="relative flex flex-col w-full justify-between md:flex-row md:items-center lg:px-3">
+          <SpringComp
+            className={classNames(
+              "flex flex-col justify-end shadow-lg shadow-gray-200 bg-white px-4 pt-4 md:hidden",
+              {
+                "shadow-none": !showMap,
+              }
+            )}
+            className_actionBtn={classNames(
+              "absolute flex justify-center items-center z-[102] top-[10px] w-[40px] h-[40px] right-2 ml-auto rounded-full md:hidden",
+              "bg-white text-primary text-[16px] hover:bg-white shadow-lg shadow-gray-400",
+              {
+                "shadow-none": !showMap,
+              },
+              {
+                "text-[20px] shadow-none": showFilters,
+              }
+            )}
+            isOpen={showFilters}
+            setIsOpen={setShowFilters}
+          >
+            {/* Search Results Header */}
+            <Typography
+              component="p"
+              variant="h6"
+              className={classNames(
+                "text-lg pl-0 pr-10 md:pr-0 lg:px-3 lg:pt-3 md:flex"
+              )}
+              ref={searchResultsRef}
+            >
+              {`Filter search results ${
+                state.searchQuery ? `for "` + state.searchQuery + `"` : ``
+              }`}
+            </Typography>
+            {/* Filters Wrapper */}
+            <Box
+              className={classNames(
+                "flex items-start justify-start md:flex-row gap-3 pt-3 px-0 m-0 w-full max-w-sm",
+                {
+                  // hidden: showFilters,
+                }
+              )}
+            >
+              <SelectInput
+                label="Category"
+                value={state.selectedCategory}
+                defaultValue={state.selectedCategory}
+                options={filterOptions.categoryOptions}
+                onChange={onCategoryChange}
+              />
+              <SelectInput
+                label="Rating"
+                value={state.selectedRating}
+                defaultValue={state.selectedRating}
+                options={filterOptions.ratingsOptions}
+                onChange={onRatingChange}
+              />
+            </Box>
+            <Box className="!h-2 w-20 mt-5 mb-1 rounded-full bg-gray-500 m-auto"></Box>
+          </SpringComp>
+
           {/* Filters Wrapper */}
           <Box
             className={classNames(
-              "flex flex-col md:flex-row gap-3 py-3 w-full max-w-sm",
+              "hidden md:flex items-start justify-start md:flex-row gap-3 pt-3 px-0 m-0 w-full max-w-sm",
               {
                 // hidden: showFilters,
               }
@@ -166,7 +224,7 @@ const FilterContainer: React.FC<Props> = ({
           </Box>
         </Box>
       </Box>
-      <IconButton
+      {/* <IconButton
         className={classNames(
           "absolute top-[10px] w-[40px] h-[40px] right-2 ml-auto rounded-full md:hidden",
           "bg-white text-primary text-[16px] hover:bg-white shadow-lg shadow-gray-400",
@@ -174,15 +232,15 @@ const FilterContainer: React.FC<Props> = ({
             "shadow-none": !showMap,
           },
           {
-            "text-[20px] shadow-none": !showFilters,
+            "text-[20px] shadow-none": showFilters,
           }
         )}
         disableRipple
         title="Show search filters"
         onClick={() => setShowFilters(!showFilters)}
       >
-        {showFilters ? Icons.filter : Icons.close}
-      </IconButton>
+        {showFilters ? Icons.close : Icons.filter}
+      </IconButton> */}
 
       {/* List */}
       <PlacesList showList={showList} />

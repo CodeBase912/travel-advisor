@@ -1,13 +1,37 @@
-import React from "react";
+import React, { useEffect } from "react";
+// import ReactDOM from "react-dom";
 import { useDrag } from "@use-gesture/react";
 import { a, useSpring, config, SpringConfig } from "@react-spring/web";
 
 import styles from "./style.module.css";
+import { Icons } from "../../../common/icons";
+import classNames from "classnames";
 
 const items = ["save item", "open item", "share item", "delete item", "cancel"];
-const height = items.length * 60 + 80;
+// const height = items.length * 60 + 80;
+const height = 400;
 
-export default function SpringComp() {
+type Props = {
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  className: string;
+  className_actionBtn: string;
+};
+
+const SpringComp: React.FC<Props> = ({
+  children,
+  isOpen,
+  setIsOpen,
+  className,
+  className_actionBtn,
+}) => {
+  console.log("children: ", children);
+
+  useEffect(() => {
+    console.log("isOpen>>>>: ", isOpen);
+  }, [isOpen]);
+
+  // console.log("children: ", children?.getBoundingCLientRect().height);
   const [{ y }, api] = useSpring(() => ({ y: -height }));
 
   const open: (config: any) => void = ({ canceled }) => {
@@ -18,6 +42,7 @@ export default function SpringComp() {
       immediate: false,
       config: canceled ? config.wobbly : config.stiff,
     });
+    setIsOpen(true);
   };
   const close = (velocity = 0) => {
     api.start({
@@ -25,6 +50,7 @@ export default function SpringComp() {
       immediate: false,
       config: { ...config.stiff, velocity },
     });
+    setIsOpen(false);
   };
 
   const bind = useDrag(
@@ -43,7 +69,7 @@ export default function SpringComp() {
       // when the user releases the sheet, we check whether it passed
       // the threshold for it to close, or if we reset it to its open positino
       if (last) {
-        my < -height * 0.5 || (vy > 0.5 && dy > 0)
+        my < -height * 0.15 || (vy > 0.5 && dy > 0)
           ? close(vy)
           : open({ canceled });
       }
@@ -68,20 +94,46 @@ export default function SpringComp() {
     ),
     opacity: y.to([0, height], [0.4, 1], "clamp"),
   };
+
+  console.log("y>>>>>>>>>>>", y);
+
   return (
     <div className="flex" style={{ overflow: "hidden" }}>
-      <div className={styles.actionBtn} onClick={open} />
-      <a.div className={styles.sheet} {...bind()} style={{ top: `0px`, y }}>
-        {items.map((entry, i) => (
-          <div
-            key={entry}
-            onClick={() =>
-              i < items.length - 1 ? alert("clicked on " + entry) : close()
-            }
-            children={entry}
-          />
-        ))}
+      {isOpen ? (
+        <div
+          className={className_actionBtn}
+          onClick={() => {
+            console.log("Triggered close");
+            close(1);
+          }}
+        >
+          {Icons.close}
+        </div>
+      ) : (
+        <div
+          className={className_actionBtn}
+          onClick={() => {
+            open({ cancelled: true });
+          }}
+        >
+          {Icons.filter}
+        </div>
+      )}
+      <a.div
+        className={classNames(styles.sheet, className)}
+        {...bind()}
+        style={{ top: `0`, y }}
+      >
+        {children}
       </a.div>
     </div>
   );
-}
+
+  // return ReactDOM.createPortal(
+  //   modalContent,
+  //   //@ts-ignore
+  //   modalRoot
+  // );
+};
+
+export default SpringComp;
