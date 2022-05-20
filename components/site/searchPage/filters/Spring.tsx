@@ -95,8 +95,6 @@ const SpringComp: React.FC<Props> = ({
     opacity: y.to([0, height], [0.4, 1], "clamp"),
   };
 
-  console.log("y>>>>>>>>>>>", y);
-
   return (
     <div className="flex" style={{ overflow: "hidden" }}>
       {isOpen ? (
@@ -122,7 +120,7 @@ const SpringComp: React.FC<Props> = ({
       <a.div
         className={classNames(styles.sheet, className)}
         {...bind()}
-        style={{ top: `0`, y }}
+        style={{ top: `calc(100% - 130px)`, y }}
       >
         {children}
       </a.div>

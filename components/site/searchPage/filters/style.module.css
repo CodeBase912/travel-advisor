@@ -11,7 +11,7 @@
 .sheet {
   z-index: 100;
   position: absolute;
-  height: fit-content;
+  height: calc(100% + 150px);
   width: 100%;
   border-radius: 12px 12px 0px;
   touch-action: none;
