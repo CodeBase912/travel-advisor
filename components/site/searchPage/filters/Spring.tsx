@@ -1,15 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 // import ReactDOM from "react-dom";
 import { useDrag } from "@use-gesture/react";
-import { a, useSpring, config, SpringConfig } from "@react-spring/web";
+import { a, useSpring, config } from "@react-spring/web";
 
 import styles from "./style.module.css";
 import { Icons } from "../../../common/icons";
 import classNames from "classnames";
-
-const items = ["save item", "open item", "share item", "delete item", "cancel"];
-// const height = items.length * 60 + 80;
-// const height = 400;
+import { IconButton, useMediaQuery } from "@mui/material";
 
 type Props = {
   className: string;
@@ -21,9 +18,10 @@ const SpringComp: React.FC<Props> = ({
   className,
   className_actionBtn,
 }) => {
-  console.log("children: ", children);
   const springRef = useRef(null);
   const [height, setHeight] = useState(0);
+  const isMobile = useMediaQuery("(max-width: 768px)");
+  const [{ y }, api] = useSpring(() => ({ y: -800 }));
 
   useEffect(() => {
     if (springRef?.current && height === 0) {
@@ -31,9 +29,6 @@ const SpringComp: React.FC<Props> = ({
       setHeight(springRef?.current.offsetHeight);
     }
   }, [height]);
-
-  // console.log("children: ", children?.getBoundingCLientRect().height);
-  const [{ y }, api] = useSpring(() => ({ y: -800 }));
 
   const open: (config: any) => void = ({ canceled }) => {
     // when cancel is true, it means that the user passed the upwards threshold
@@ -84,42 +79,41 @@ const SpringComp: React.FC<Props> = ({
     }
   );
 
-  const display = y.to((py) => (py < height ? "block" : "none"));
-
-  const bgStyle = {
-    transform: y.to(
-      [0, height],
-      ["translateY(-8%) scale(1.16)", "translateY(0px) scale(1.05)"]
-    ),
-    opacity: y.to([0, height], [0.4, 1], "clamp"),
-  };
-
   return (
-    <div className="flex" style={{ overflow: "hidden" }}>
-      <div
-        className={className_actionBtn}
+    <div className="flex w-full" style={{ overflow: "hidden" }}>
+      <IconButton
+        className={classNames(className_actionBtn)}
         onClick={() => {
           open({ cancelled: true });
         }}
+        disableRipple
       >
         {Icons.filter}
-      </div>
-      <a.div
-        className={classNames(styles.sheet, className)}
-        {...bind()}
-        style={{ top: `calc(100% - 130px)`, y }}
-        ref={springRef}
-      >
-        {children}
-      </a.div>
+      </IconButton>
+      {/* Display React Spring animated  div on mobile devices only */}
+      {isMobile ? (
+        <a.div
+          className={classNames(
+            "w-[97vw] left-[50%] z-50 absolute rounded-[12px]",
+            styles.sheet,
+            className
+          )}
+          {...bind()}
+          style={{
+            top: `calc(100% - 150px)`,
+            height: `calc(100% + 150px)`,
+            transform: `translateX(-50%)`, // Translate used inline because it doesn't work in tailwind css. **Must investigate
+            y,
+          }}
+          ref={springRef}
+        >
+          {children}
+        </a.div>
+      ) : (
+        <div className={classNames("w-full", className)}>{children}</div>
+      )}
     </div>
   );
-
-  // return ReactDOM.createPortal(
-  //   modalContent,
-  //   //@ts-ignore
-  //   modalRoot
-  // );
 };
 
 export default SpringComp;

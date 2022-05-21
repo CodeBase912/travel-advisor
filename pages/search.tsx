@@ -36,30 +36,22 @@ const Search: NextPage = () => {
   //     .catch((err) => console.error(err));
   // }, []);
 
-  console.log({ isDesktop });
-
   return (
     <SearchState>
       <Header />
       <main className="relative flex flex-col h-screen w-screen pt-14 lg:flex-row m-auto">
         {/* Search Filters */}
-        <FilterContainer
-          showMap={showMap}
-          showList={isDesktop}
-          setShowMap={setShowMap}
-        />
-
-        {/* Map */}
-        <Map showMap={isDesktop ? true : showMap} />
-
-        {/* List */}
-        <MobileList showList={isDesktop ? false : showMap} />
+        <FilterContainer showMap={showMap} setShowMap={setShowMap} />
         <PlacesList
           showList={isDesktop ? false : !showMap}
           isDesktop={isDesktop}
         />
 
-        {/* <SpringComp /> */}
+        {/* Map */}
+        <Map showMap={isDesktop ? true : showMap} />
+
+        {/* MobileList - PlacesList for Mobile devices */}
+        <MobileList showList={isDesktop ? false : showMap} />
       </main>
     </SearchState>
   );
