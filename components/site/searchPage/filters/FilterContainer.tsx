@@ -110,17 +110,12 @@ const FilterContainer: React.FC<Props> = ({
               }
             )}
             className_actionBtn={classNames(
-              "absolute flex justify-center items-center z-[102] top-[10px] w-[40px] h-[40px] right-2 ml-auto rounded-full md:hidden",
+              "absolute flex justify-center items-center top-[10px] w-[40px] h-[40px] right-2 ml-auto rounded-full md:hidden",
               "bg-white text-primary text-[16px] hover:bg-white shadow-lg shadow-gray-400",
               {
                 "shadow-none": !showMap,
-              },
-              {
-                "text-[20px] shadow-none": showFilters,
               }
             )}
-            isOpen={showFilters}
-            setIsOpen={setShowFilters}
           >
             {/* Search Results Header */}
             <Typography
@@ -131,9 +126,7 @@ const FilterContainer: React.FC<Props> = ({
               )}
               ref={searchResultsRef}
             >
-              {`Filter search results ${
-                state.searchQuery ? `for "` + state.searchQuery + `"` : ``
-              }`}
+              {`Filter search results`}
             </Typography>
             {/* Filters Wrapper */}
             <Box

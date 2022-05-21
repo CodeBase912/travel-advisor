@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 // import ReactDOM from "react-dom";
 import { useDrag } from "@use-gesture/react";
 import { a, useSpring, config, SpringConfig } from "@react-spring/web";
@@ -9,30 +9,31 @@ import classNames from "classnames";
 
 const items = ["save item", "open item", "share item", "delete item", "cancel"];
 // const height = items.length * 60 + 80;
-const height = 400;
+// const height = 400;
 
 type Props = {
-  isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   className: string;
   className_actionBtn: string;
 };
 
 const SpringComp: React.FC<Props> = ({
   children,
-  isOpen,
-  setIsOpen,
   className,
   className_actionBtn,
 }) => {
   console.log("children: ", children);
+  const springRef = useRef(null);
+  const [height, setHeight] = useState(0);
 
   useEffect(() => {
-    console.log("isOpen>>>>: ", isOpen);
-  }, [isOpen]);
+    if (springRef?.current && height === 0) {
+      // @ts-ignore
+      setHeight(springRef?.current.offsetHeight);
+    }
+  }, [height]);
 
   // console.log("children: ", children?.getBoundingCLientRect().height);
-  const [{ y }, api] = useSpring(() => ({ y: -height }));
+  const [{ y }, api] = useSpring(() => ({ y: -800 }));
 
   const open: (config: any) => void = ({ canceled }) => {
     // when cancel is true, it means that the user passed the upwards threshold
@@ -42,15 +43,13 @@ const SpringComp: React.FC<Props> = ({
       immediate: false,
       config: canceled ? config.wobbly : config.stiff,
     });
-    setIsOpen(true);
   };
   const close = (velocity = 0) => {
     api.start({
-      y: -height,
+      y: -800,
       immediate: false,
       config: { ...config.stiff, velocity },
     });
-    setIsOpen(false);
   };
 
   const bind = useDrag(
@@ -97,30 +96,19 @@ const SpringComp: React.FC<Props> = ({
 
   return (
     <div className="flex" style={{ overflow: "hidden" }}>
-      {isOpen ? (
-        <div
-          className={className_actionBtn}
-          onClick={() => {
-            console.log("Triggered close");
-            close(1);
-          }}
-        >
-          {Icons.close}
-        </div>
-      ) : (
-        <div
-          className={className_actionBtn}
-          onClick={() => {
-            open({ cancelled: true });
-          }}
-        >
-          {Icons.filter}
-        </div>
-      )}
+      <div
+        className={className_actionBtn}
+        onClick={() => {
+          open({ cancelled: true });
+        }}
+      >
+        {Icons.filter}
+      </div>
       <a.div
         className={classNames(styles.sheet, className)}
         {...bind()}
         style={{ top: `calc(100% - 130px)`, y }}
+        ref={springRef}
       >
         {children}
       </a.div>
