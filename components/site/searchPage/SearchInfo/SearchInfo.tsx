@@ -21,10 +21,10 @@ const SearchInfo: React.FC = () => {
         <ViewMapToggler />
       </Box>
 
-      {/* Search Results Container */}
-      {/* PlacesList for large screen devices, i.e. tablets, laptops & desktops */}
+      {/* Search Results Container - need to refactor these into one component */}
+      {/* Results List for large screen devices, i.e. tablets, laptops & desktops */}
       <PlacesList />
-      {/* MobileList - PlacesList for Mobile devices */}
+      {/* Results List for Mobile devices */}
       <MobileList />
     </Box>
   );
