@@ -10,14 +10,17 @@ import {
   UPDATE_SELECTED_RATING,
   UPDATE_MAP_COORDS,
   UPDATE_USER_COORDS,
+  UPDATE_SHOW_MAP,
 } from "./search-context-actions";
 // Import Types
 import { SearchState } from "./search-context-types";
 // Import Filter Options
-import filterOptions from "../../components/site/searchPage/filters/filter-options";
+import filterOptions from "./filter-options";
 
 type SearchContextType = {
-  state: SearchState;
+  searchState: SearchState;
+  isDesktop: boolean;
+  updateShowMap: (showMapState: boolean) => void;
   updateSearchQuery: (query: string) => void;
   updateSelectedCategory: (category: string) => void;
   updateSelectedRating: (rating: string) => void;
@@ -28,10 +31,10 @@ type SearchContextType = {
 // @ts-ignore
 export const SearchContext = createContext<SearchContextType>({});
 
-const SearchState: React.FC = ({ children }) => {
+const SearchStateProvider: React.FC = ({ children }) => {
   const isDesktop = useMediaQuery("(min-width: 1024px)");
   const initialState: SearchState = {
-    isDesktop,
+    showMap: true,
     searchQuery: "",
     selectedCategory: filterOptions.categoryOptions[0].value,
     selectedRating: filterOptions.ratingsOptions[0].value,
@@ -39,6 +42,11 @@ const SearchState: React.FC = ({ children }) => {
     userCoords: { lat: 0, lng: 0 },
   };
   const [state, dispatch] = useReducer(searchReducer, initialState);
+
+  // Update Show Map
+  const updateShowMap = (showMapState: boolean) => {
+    dispatch({ type: UPDATE_SHOW_MAP, payload: showMapState });
+  };
 
   // Update Search Query
   const updateSearchQuery = (query: string) => {
@@ -68,7 +76,9 @@ const SearchState: React.FC = ({ children }) => {
   return (
     <SearchContext.Provider
       value={{
-        state,
+        searchState: state,
+        isDesktop,
+        updateShowMap,
         updateSearchQuery,
         updateSelectedCategory,
         updateSelectedRating,
@@ -81,4 +91,4 @@ const SearchState: React.FC = ({ children }) => {
   );
 };
 
-export default SearchState;
+export default SearchStateProvider;

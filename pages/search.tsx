@@ -6,11 +6,10 @@ import SearchState from "../contexts/searchContext/SearchState";
 import { useMediaQuery } from "@mui/material";
 // Import Custom React Components
 import Header from "../components/site/header/Header";
-import FilterContainer from "../components/site/searchPage/filters/FilterContainer";
+import SearchInfo from "../components/site/searchPage/filters/SearchInfo";
 import Map from "../components/site/searchPage/Map";
 import PlacesList from "../components/site/searchPage/PlacesList";
 import MobileList from "../components/site/searchPage/MobileList";
-import SpringComp from "../components/site/searchPage/filters/Spring";
 
 const Search: NextPage = () => {
   const [showMap, setShowMap] = useState(true);
@@ -40,18 +39,11 @@ const Search: NextPage = () => {
     <SearchState>
       <Header />
       <main className="relative flex flex-col h-screen w-screen pt-14 lg:flex-row m-auto">
-        {/* Search Filters */}
-        <FilterContainer showMap={showMap} setShowMap={setShowMap} />
-        <PlacesList
-          showList={isDesktop ? false : !showMap}
-          isDesktop={isDesktop}
-        />
+        {/* Render Search Info */}
+        <SearchInfo />
 
-        {/* Map */}
-        <Map showMap={isDesktop ? true : showMap} />
-
-        {/* MobileList - PlacesList for Mobile devices */}
-        <MobileList showList={isDesktop ? false : showMap} />
+        {/* Render Map */}
+        <Map />
       </main>
     </SearchState>
   );

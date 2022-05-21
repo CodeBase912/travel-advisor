@@ -1,5 +1,5 @@
 export type SearchState = {
-  isDesktop: boolean;
+  showMap: boolean;
   searchQuery: string;
   selectedCategory: string;
   selectedRating: string;

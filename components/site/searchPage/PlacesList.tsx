@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import classNames from "classnames";
 // Import MaterialUI COmponents
 import { Box, IconButton, Rating, Typography } from "@mui/material";
@@ -6,20 +6,17 @@ import { Box, IconButton, Rating, Typography } from "@mui/material";
 import placeImg from "../../../public/static/luca-bravo-O453M2Liufs-unsplash.jpg";
 import Image from "next/image";
 import { Icons } from "../../common/icons";
+import { SearchContext } from "../../../contexts/searchContext/SearchState";
 
-type Props = {
-  showList?: boolean;
-  isDesktop?: boolean;
-};
+const PlacesList: React.FC = () => {
+  const { searchState, isDesktop } = useContext(SearchContext);
 
-const PlacesList: React.FC<Props> = ({ showList = true, isDesktop }) => {
   return (
     <Box
       className={classNames(
         "p-2",
-        { hidden: showList === false },
-        { "pt-16 md:pt-2": showList === true },
-        { absolute: isDesktop === true }
+        { hidden: isDesktop === false },
+        { "pt-16 md:pt-2": isDesktop === true }
       )}
     >
       {/* PlacesList */}

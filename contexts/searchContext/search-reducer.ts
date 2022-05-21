@@ -7,6 +7,7 @@ import {
   UPDATE_SELECTED_RATING,
   UPDATE_MAP_COORDS,
   UPDATE_USER_COORDS,
+  UPDATE_SHOW_MAP,
 } from "./search-context-actions";
 
 const searchReducer: (state: SearchState, action: Action) => SearchState = (
@@ -24,6 +25,8 @@ const searchReducer: (state: SearchState, action: Action) => SearchState = (
       return { ...state, mapCoords: action.payload };
     case UPDATE_USER_COORDS:
       return { ...state, userCoords: action.payload };
+    case UPDATE_SHOW_MAP:
+      return { ...state, showMap: action.payload };
     default:
       return state;
   }

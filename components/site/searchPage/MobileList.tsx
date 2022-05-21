@@ -1,24 +1,20 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import classNames from "classnames";
 import { Box, Typography, IconButton, Rating } from "@mui/material";
 import Image from "next/image";
 import placeImg from "../../../public/static/luca-bravo-O453M2Liufs-unsplash.jpg";
 
 import { Icons } from "../../common/icons";
+import { SearchContext } from "../../../contexts/searchContext/SearchState";
 
-// const height = items.length * 60 + 80;
-
-type Props = {
-  showList?: boolean;
-};
-
-const MobileList: React.FC<Props> = ({ showList = true }) => {
+const MobileList: React.FC = () => {
+  const { searchState, isDesktop } = useContext(SearchContext);
   return (
     <Box
       className={classNames(
         "p-2 ",
-        { hidden: showList === false },
-        { "absolute bottom-2 left-0": showList === true }
+        { hidden: isDesktop === true },
+        { "absolute bottom-2 left-0": searchState.showMap === true }
       )}
     >
       {/* MobileList */}

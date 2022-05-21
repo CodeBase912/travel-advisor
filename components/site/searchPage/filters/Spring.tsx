@@ -6,7 +6,7 @@ import { a, useSpring, config } from "@react-spring/web";
 import styles from "./style.module.css";
 import { Icons } from "../../../common/icons";
 import classNames from "classnames";
-import { IconButton, useMediaQuery } from "@mui/material";
+import { IconButton } from "@mui/material";
 
 type Props = {
   className: string;
@@ -20,7 +20,6 @@ const SpringComp: React.FC<Props> = ({
 }) => {
   const springRef = useRef(null);
   const [height, setHeight] = useState(0);
-  const isMobile = useMediaQuery("(max-width: 768px)");
   const [{ y }, api] = useSpring(() => ({ y: -800 }));
 
   useEffect(() => {
@@ -90,28 +89,26 @@ const SpringComp: React.FC<Props> = ({
       >
         {Icons.filter}
       </IconButton>
-      {/* Display React Spring animated  div on mobile devices only */}
-      {isMobile ? (
-        <a.div
-          className={classNames(
-            "w-[97vw] left-[50%] z-50 absolute rounded-[12px]",
-            styles.sheet,
-            className
-          )}
-          {...bind()}
-          style={{
-            top: `calc(100% - 150px)`,
-            height: `calc(100% + 150px)`,
-            transform: `translateX(-50%)`, // Translate used inline because it doesn't work in tailwind css. **Must investigate
-            y,
-          }}
-          ref={springRef}
-        >
-          {children}
-        </a.div>
-      ) : (
-        <div className={classNames("w-full", className)}>{children}</div>
-      )}
+      <a.div
+        className={classNames(
+          "w-[97vw] left-[50%] z-50 absolute rounded-[12px] flex flex-col justify-end",
+          styles.sheet,
+          className
+        )}
+        {...bind()}
+        style={{
+          top: `calc(100% - 150px)`,
+          height: `calc(100% + 150px)`,
+          transform: `translateX(-50%)`, // Translate used inline because it doesn't work in tailwind css. **Must investigate
+          y,
+        }}
+        ref={springRef}
+      >
+        {children}
+
+        {/* Drag Handle Bar */}
+        <div className="!h-2 w-20 mt-5 mb-1 rounded-full bg-gray-500 m-auto"></div>
+      </a.div>
     </div>
   );
 };

@@ -7,13 +7,8 @@ import { SearchContext } from "../../../contexts/searchContext/SearchState";
 // Import MaterialUI Components
 import { Paper, Rating, Box, Typography, Button } from "@mui/material";
 
-type Props = {
-  showMap: boolean;
-};
-
-const Map: React.FC<Props> = ({ showMap }) => {
-  const { state, updateMapCoords, updateUserCoords } =
-    useContext(SearchContext);
+const Map: React.FC = () => {
+  const { searchState, updateMapCoords } = useContext(SearchContext);
   const [getCoordsErrorMessage, setGetCoordsErrorMessage] = useState("");
 
   const defaultLocation = { lat: 51.507351, lng: -0.127758 }; // London, UK
@@ -59,13 +54,17 @@ const Map: React.FC<Props> = ({ showMap }) => {
     );
   }, []);
 
-  useEffect(() => {}, [state.userCoords, state.mapCoords]);
+  useEffect(() => {}, [
+    searchState.userCoords,
+    searchState.mapCoords,
+    searchState.showMap,
+  ]);
 
   return (
     <Box
       component={"section"}
       className={classNames("flex-1 w-full", {
-        hidden: !state.isDesktop && showMap === false, // Enable toggle show/hide map on mobile devices
+        hidden: searchState.isDesktop ? true : searchState.showMap, // Enable toggle show/hide map on mobile devices
       })}
     >
       <GoogleMapReact
@@ -75,7 +74,7 @@ const Map: React.FC<Props> = ({ showMap }) => {
             : "",
         }}
         defaultCenter={defaultLocation}
-        center={state.mapCoords}
+        center={searchState.mapCoords}
         defaultZoom={15}
         // margin={[50, 50, 50, 50]}
         // onChange={() => {}}
