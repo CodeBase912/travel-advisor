@@ -1,11 +1,11 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import classNames from "classnames";
 import { Box, Typography, IconButton, Rating } from "@mui/material";
 import Image from "next/image";
-import placeImg from "../../../public/static/luca-bravo-O453M2Liufs-unsplash.jpg";
+import placeImg from "../../../../public/static/luca-bravo-O453M2Liufs-unsplash.jpg";
 
-import { Icons } from "../../common/icons";
-import { SearchContext } from "../../../contexts/searchContext/SearchState";
+import { Icons } from "../../../common/icons";
+import { SearchContext } from "../../../../contexts/searchContext/SearchState";
 
 const MobileList: React.FC = () => {
   const { searchState, isDesktop } = useContext(SearchContext);

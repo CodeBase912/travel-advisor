@@ -4,7 +4,7 @@ import { useDrag } from "@use-gesture/react";
 import { a, useSpring, config } from "@react-spring/web";
 
 import styles from "./style.module.css";
-import { Icons } from "../../../common/icons";
+import { Icons } from "../icons";
 import classNames from "classnames";
 import { IconButton } from "@mui/material";
 
@@ -13,7 +13,7 @@ type Props = {
   className_actionBtn: string;
 };
 
-const SpringComp: React.FC<Props> = ({
+const PopupOnToggle: React.FC<Props> = ({
   children,
   className,
   className_actionBtn,
@@ -113,4 +113,4 @@ const SpringComp: React.FC<Props> = ({
   );
 };
 
-export default SpringComp;
+export default PopupOnToggle;

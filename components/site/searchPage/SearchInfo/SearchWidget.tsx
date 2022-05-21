@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import classNames from "classnames";
-import { SearchContext } from "../../../contexts/searchContext/SearchState";
-import SpringComp from "./filters/Spring";
+import { SearchContext } from "../../../../contexts/searchContext/SearchState";
+import PopupOnToggle from "../../../common/PopupOnToggle/PopupOnToggle";
 import { Box, Typography, useMediaQuery } from "@mui/material";
-import SelectInput from "../forms/inputs/SelectInput";
-import filterOptions from "../../../contexts/searchContext/filter-options";
+import SelectInput from "../../forms/inputs/SelectInput";
+import filterOptions from "../../../../contexts/searchContext/filter-options";
 
 type Props = {};
 
@@ -67,7 +67,7 @@ const SearchWidget: React.FC<Props> = () => {
   );
 
   return isMobile ? (
-    <SpringComp
+    <PopupOnToggle
       className={classNames(
         "flex md:relative items-end shadow-lg shadow-gray-200 bg-white px-4 pt-4 md:px-0 md:pt-0",
         {
@@ -83,7 +83,7 @@ const SearchWidget: React.FC<Props> = () => {
       )}
     >
       {searchFilters}
-    </SpringComp>
+    </PopupOnToggle>
   ) : (
     searchFilters
   );

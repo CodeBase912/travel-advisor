@@ -1,20 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { NextPage } from "next";
 // Import Context & State Variables
 import SearchState from "../contexts/searchContext/SearchState";
-// Import MaterialUI Components
-import { useMediaQuery } from "@mui/material";
 // Import Custom React Components
 import Header from "../components/site/header/Header";
-import SearchInfo from "../components/site/searchPage/filters/SearchInfo";
+import SearchInfo from "../components/site/searchPage/SearchInfo/SearchInfo";
 import Map from "../components/site/searchPage/Map";
-import PlacesList from "../components/site/searchPage/PlacesList";
-import MobileList from "../components/site/searchPage/MobileList";
 
 const Search: NextPage = () => {
-  const [showMap, setShowMap] = useState(true);
-  const isDesktop = useMediaQuery("(min-width: 1024px)");
-
   // useEffect(() => {
   //   const options = {
   //     method: "POST",

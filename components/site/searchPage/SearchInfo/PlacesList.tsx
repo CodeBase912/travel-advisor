@@ -1,12 +1,12 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import classNames from "classnames";
 // Import MaterialUI COmponents
 import { Box, IconButton, Rating, Typography } from "@mui/material";
 // Import Images
-import placeImg from "../../../public/static/luca-bravo-O453M2Liufs-unsplash.jpg";
+import placeImg from "../../../../public/static/luca-bravo-O453M2Liufs-unsplash.jpg";
 import Image from "next/image";
-import { Icons } from "../../common/icons";
-import { SearchContext } from "../../../contexts/searchContext/SearchState";
+import { Icons } from "../../../common/icons";
+import { SearchContext } from "../../../../contexts/searchContext/SearchState";
 
 const PlacesList: React.FC = () => {
   const { searchState, isDesktop } = useContext(SearchContext);
