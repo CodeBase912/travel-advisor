@@ -7,6 +7,7 @@ const ViewMapToggler = () => {
   const { searchState, updateShowMap } = useContext(SearchContext);
   return (
     <Box className="flex justify-start md:justify-end md:items-end w-full pb-1 lg:hidden p-3 top-3 left-2 md:relative md:top-0 md:left-0">
+      {/* View Map Button */}
       <Button
         className={classNames("rounded-full mr-3", {
           "bg-primary hover:bg-primary text-white h-fit shadow-lg shadow-gray-400 md:shadow-none":
@@ -20,6 +21,8 @@ const ViewMapToggler = () => {
       >
         {"View Map"}
       </Button>
+
+      {/* View List Button */}
       <Button
         className={classNames(
           "rounded-full h-fit",

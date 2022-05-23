@@ -8,7 +8,7 @@ import { SearchContext } from "../../../contexts/searchContext/SearchState";
 import { Paper, Rating, Box, Typography, Button } from "@mui/material";
 
 const Map: React.FC = () => {
-  const { searchState, updateMapCoords } = useContext(SearchContext);
+  const { searchState, isDesktop, updateMapCoords } = useContext(SearchContext);
   const [getCoordsErrorMessage, setGetCoordsErrorMessage] = useState("");
 
   const defaultLocation = { lat: 51.507351, lng: -0.127758 }; // London, UK
@@ -60,11 +60,13 @@ const Map: React.FC = () => {
     searchState.showMap,
   ]);
 
+  console.log("isDesktop: ", isDesktop);
+
   return (
     <Box
       component={"section"}
       className={classNames("flex-1 w-full", {
-        hidden: searchState.isDesktop ? true : searchState.showMap, // Enable toggle show/hide map on mobile devices
+        hidden: isDesktop ? false : !searchState.showMap, // Enable toggle show/hide map on mobile devices
       })}
     >
       <GoogleMapReact

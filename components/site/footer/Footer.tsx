@@ -111,7 +111,9 @@ const Footer: React.FC = () => {
                   className="font-thin uppercase text-white text-xs text-left"
                 >
                   <span className="text-xs">{"Get it on "}</span>
-                  <span className="whitespace-nowrap">{"Google Play"}</span>
+                  <span className="whitespace-nowrap font-bold">
+                    {"Google Play"}
+                  </span>
                 </Typography>
               </Box>
             </Button>
@@ -131,10 +133,12 @@ const Footer: React.FC = () => {
                 </div>
                 <Typography
                   component="p"
-                  className="felx flex-col font-thin uppercase text-white text-xs text-left"
+                  className="font-thin uppercase text-white text-xs text-left"
                 >
                   <span className="text-xxs">{"Available on the "}</span>
-                  <span className="whitespace-nowrap">{"Apple Store"}</span>
+                  <span className="whitespace-nowrap font-bold">
+                    {"App Store"}
+                  </span>
                 </Typography>
               </Box>
             </Button>

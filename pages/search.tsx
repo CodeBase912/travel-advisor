@@ -1,7 +1,7 @@
 import React from "react";
 import { NextPage } from "next";
 // Import Context & State Variables
-import SearchState from "../contexts/searchContext/SearchState";
+import SearchStateProvider from "../contexts/searchContext/SearchState";
 // Import Custom React Components
 import Header from "../components/site/header/Header";
 import SearchInfo from "../components/site/searchPage/SearchInfo/SearchInfo";
@@ -29,7 +29,7 @@ const Search: NextPage = () => {
   // }, []);
 
   return (
-    <SearchState>
+    <SearchStateProvider>
       <Header />
       <main className="relative flex flex-col h-screen w-screen pt-14 lg:flex-row m-auto">
         {/* Render Search Info */}
@@ -38,7 +38,7 @@ const Search: NextPage = () => {
         {/* Render Map */}
         <Map />
       </main>
-    </SearchState>
+    </SearchStateProvider>
   );
 };
 
