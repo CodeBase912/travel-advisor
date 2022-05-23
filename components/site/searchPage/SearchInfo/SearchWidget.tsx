@@ -42,7 +42,7 @@ const SearchWidget: React.FC<Props> = () => {
       {/* Filters Container */}
       <Box
         className={classNames(
-          "flex items-start justify-start md:flex-row gap-3 pt-3 px-0 m-0 w-full max-w-sm",
+          "flex items-start justify-start md:flex-row gap-3 py-3 px-0 m-0 w-full max-w-sm",
           {
             // hidden: showFilters,
           }

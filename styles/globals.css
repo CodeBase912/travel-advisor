@@ -22,5 +22,13 @@
     .x-shadow {
       box-shadow: 5px 0 20px lightgrey;
     }
+
+    .shadow-around {
+      box-shadow: 0 5px 15px #bdbbbb;
+    }
   }
+}
+
+.color {
+  color: #bdbbbb;
 }

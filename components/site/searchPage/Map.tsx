@@ -36,6 +36,8 @@ const Map: React.FC = () => {
         // User position not retrieved
         console.log("Get coordinates error: ", err);
 
+        // alert(err.message);
+
         // Handle errors
         if (err?.code === 1) {
           // User denied geolocation permission
@@ -50,7 +52,8 @@ const Map: React.FC = () => {
           // Set default location
           updateMapCoords(defaultLocation);
         }
-      }
+      },
+      { enableHighAccuracy: true }
     );
   }, []);
 
@@ -61,11 +64,13 @@ const Map: React.FC = () => {
   ]);
 
   console.log("isDesktop: ", isDesktop);
+  console.log("searchState.showMap: ", searchState.showMap);
+  console.log("isHidden: ", !searchState.showMap);
 
   return (
     <Box
       component={"section"}
-      className={classNames("flex-1 w-full", {
+      className={classNames("flex-1 w-full touch-none", {
         hidden: isDesktop ? false : !searchState.showMap, // Enable toggle show/hide map on mobile devices
       })}
     >

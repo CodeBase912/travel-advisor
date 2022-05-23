@@ -14,6 +14,7 @@ import {
   faFilter,
   faXmark,
   faHeart,
+  faClock,
 } from "@fortawesome/free-solid-svg-icons";
 
 import {
@@ -41,7 +42,8 @@ library.add(
   faEllipsisV,
   faFilter,
   faXmark,
-  faHeart
+  faHeart,
+  faClock
 );
 
 export const Icons = {
@@ -55,6 +57,7 @@ export const Icons = {
   ellipsisVertical: <FontAwesomeIcon icon={faEllipsisV} />,
   filter: <FontAwesomeIcon icon={faFilter} />,
   close: <FontAwesomeIcon icon={faXmark} />,
+  clock: <FontAwesomeIcon icon={faClock} />,
   bars: <FontAwesomeIcon icon={["fas", "bars"]} />,
   envelope: <FontAwesomeIcon icon={["far", "envelope"]} />,
   lock: <FontAwesomeIcon icon={["far", "lock"]} />,

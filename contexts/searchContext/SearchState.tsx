@@ -6,6 +6,7 @@ import searchReducer from "./search-reducer";
 // Import Search Context Actions
 import {
   UPDATE_SEARCH_TERM,
+  UPDATE_SEARCH_RESULT,
   UPDATE_SELECTED_CATEGORY,
   UPDATE_SELECTED_RATING,
   UPDATE_MAP_COORDS,
@@ -13,7 +14,7 @@ import {
   UPDATE_SHOW_MAP,
 } from "./search-context-actions";
 // Import Types
-import { SearchState } from "./search-context-types";
+import { SearchResult, SearchState } from "./search-context-types";
 // Import Filter Options
 import filterOptions from "./filter-options";
 
@@ -22,6 +23,7 @@ type SearchContextType = {
   isDesktop: boolean;
   updateShowMap: (showMapState: boolean) => void;
   updateSearchQuery: (query: string) => void;
+  updateSearchResult: (result: SearchResult) => void;
   updateSelectedCategory: (category: string) => void;
   updateSelectedRating: (rating: string) => void;
   updateMapCoords: (coords: { lat: number; lng: number }) => void;
@@ -36,6 +38,7 @@ const SearchStateProvider: React.FC = ({ children }) => {
   const initialState: SearchState = {
     showMap: true,
     searchQuery: "",
+    result: undefined,
     selectedCategory: filterOptions.categoryOptions[0].value,
     selectedRating: filterOptions.ratingsOptions[0].value,
     mapCoords: { lat: 0, lng: 0 },
@@ -51,6 +54,11 @@ const SearchStateProvider: React.FC = ({ children }) => {
   // Update Search Query
   const updateSearchQuery = (query: string) => {
     dispatch({ type: UPDATE_SEARCH_TERM, payload: query });
+  };
+
+  // Update Search Result
+  const updateSearchResult = (result: SearchResult) => {
+    dispatch({ type: UPDATE_SEARCH_RESULT, payload: result });
   };
 
   // Update Selected Category
@@ -80,6 +88,7 @@ const SearchStateProvider: React.FC = ({ children }) => {
         isDesktop,
         updateShowMap,
         updateSearchQuery,
+        updateSearchResult,
         updateSelectedCategory,
         updateSelectedRating,
         updateMapCoords,
