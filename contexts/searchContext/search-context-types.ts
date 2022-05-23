@@ -10,7 +10,6 @@ export type SearchState = {
 
 export type SearchResult = {
   list: any[];
-  mapCarousel: any[];
   activeItemID: number;
 };
 

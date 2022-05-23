@@ -25,29 +25,23 @@ const SearchInfo: React.FC = () => {
 
     let count = 0;
     const searchResultsList =
-      sampleData.AppPresentation_queryAppListV2[0].sections.filter((item) => {
-        if (item.__typename === "AppPresentation_AdPlaceholderNative") {
-          count++;
-        }
-        if (item.__typename == "AppPresentation_SingleCard") {
-          return item;
-        }
-      });
+      sampleData.AppPresentation_queryAppListV2[0].sections.filter(
+        (item) => item.__typename == "AppPresentation_SingleCard"
+      );
 
     const mapCarousel = sampleData.AppPresentation_queryAppListV2[0]
       .mapSections[1].content
       ? sampleData.AppPresentation_queryAppListV2[0].mapSections[1].content
       : [];
 
-    // console.log("searchResultsList: ", searchResultsList);
-    // console.log("mapCarousel: ", mapCarousel);
-    // console.log("updateSearchResult: ", updateSearchResult);
-
     if (!searchState.result)
       updateSearchResult({
         list: searchResultsList,
-        mapCarousel,
-        activeItemID: parseInt(mapCarousel[0].saveId.id),
+        activeItemID: parseInt(
+          searchResultsList[0].singleCardContent?.saveId.id
+            ? searchResultsList[0].singleCardContent.saveId.id
+            : "0"
+        ),
       });
     console.log("searchState: ", searchState);
   }, [searchState.result]);
