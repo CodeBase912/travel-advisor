@@ -5,14 +5,14 @@ import { Box, Button } from "@mui/material";
 // Import Custom React Components
 import SearchWidget from "./SearchWidget";
 import PlacesList from "./PlacesList";
-import MobileList from "./MobileList";
 import ViewMapToggler from "./ViewMapToggler";
 import { SearchContext } from "../../../../contexts/searchContext/SearchState";
 import { getMapData, options } from "../../../../utility/map";
 import { sampleData } from "../../../../utility/sampleData";
 
 const SearchInfo: React.FC = () => {
-  const { searchState, updateSearchResult } = useContext(SearchContext);
+  const { searchState, isDesktop, updateSearchResult } =
+    useContext(SearchContext);
   // Get mapData
   useEffect(() => {
     const updateMapDataState = async () => {
@@ -68,11 +68,8 @@ const SearchInfo: React.FC = () => {
         <ViewMapToggler />
       </Box>
 
-      {/* Search Results Container - need to refactor these into one component */}
-      {/* Results List for large screen devices, i.e. tablets, laptops & desktops */}
+      {/* Search Results Container */}
       <PlacesList />
-      {/* Results List for Mobile devices */}
-      <MobileList />
     </Box>
   );
 };
