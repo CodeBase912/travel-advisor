@@ -12,7 +12,7 @@ import { Autocomplete } from "@react-google-maps/api";
 
 const SearchBar = () => {
   const router = useRouter();
-  const { state, updateSearchQuery } = useContext(SearchContext);
+  const { searchState, updateSearchQuery } = useContext(SearchContext);
 
   const methods = useForm({});
 
