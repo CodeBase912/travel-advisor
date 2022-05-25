@@ -34,6 +34,8 @@ const Home: NextPage = () => {
               variant="contained"
               disableElevation
               disableRipple
+              href="/search"
+              LinkComponent="a"
             >
               {"Explore more"}
             </Button>

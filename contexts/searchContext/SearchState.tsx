@@ -41,7 +41,7 @@ const SearchStateProvider: React.FC = ({ children }) => {
     result: undefined,
     selectedCategory: filterOptions.categoryOptions[0].value,
     selectedRating: filterOptions.ratingsOptions[0].value,
-    mapCoords: { lat: 0, lng: 0 },
+    mapCoords: { lat: -26.195246, lng: 28.034088 }, // Johannesburg, South Africa
     userCoords: { lat: 0, lng: 0 },
   };
   const [state, dispatch] = useReducer(searchReducer, initialState);

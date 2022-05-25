@@ -23,16 +23,10 @@ const SearchInfo: React.FC = () => {
       return result;
     };
 
-    let count = 0;
     const searchResultsList =
       sampleData.AppPresentation_queryAppListV2[0].sections.filter(
         (item) => item.__typename == "AppPresentation_SingleCard"
       );
-
-    const mapCarousel = sampleData.AppPresentation_queryAppListV2[0]
-      .mapSections[1].content
-      ? sampleData.AppPresentation_queryAppListV2[0].mapSections[1].content
-      : [];
 
     if (!searchState.result)
       updateSearchResult({

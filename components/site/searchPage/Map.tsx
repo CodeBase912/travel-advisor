@@ -11,7 +11,7 @@ const Map: React.FC = () => {
   const { searchState, isDesktop, updateMapCoords } = useContext(SearchContext);
   const [getCoordsErrorMessage, setGetCoordsErrorMessage] = useState("");
 
-  const defaultLocation = { lat: 51.507351, lng: -0.127758 }; // London, UK
+  const defaultLocation = { lat: -26.195246, lng: 28.034088 }; // Johannesburg, South Africa
   const defaultMapOptions = {
     fullscreenControl: false,
   };
