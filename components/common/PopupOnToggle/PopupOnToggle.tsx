@@ -11,16 +11,19 @@ import { IconButton } from "@mui/material";
 type Props = {
   className: string;
   className_actionBtn: string;
+  position?: string;
 };
 
 const PopupOnToggle: React.FC<Props> = ({
   children,
   className,
   className_actionBtn,
+  position = "top",
 }) => {
   const springRef = useRef(null);
   const [height, setHeight] = useState(0);
-  const [{ y }, api] = useSpring(() => ({ y: -800 }));
+  const initialPosiiton = position === "top" ? { y: -800 } : { y: 800 };
+  const [{ y }, api] = useSpring(() => initialPosiiton);
 
   useEffect(() => {
     if (springRef?.current && height === 0) {
@@ -40,12 +43,13 @@ const PopupOnToggle: React.FC<Props> = ({
   };
   const close = (velocity = 0) => {
     api.start({
-      y: -800,
+      ...initialPosiiton,
       immediate: false,
       config: { ...config.stiff, velocity },
     });
   };
 
+  const bounds = position === "top" ? { bottom: 0 } : { top: 0 };
   const bind = useDrag(
     ({
       last,
@@ -57,14 +61,21 @@ const PopupOnToggle: React.FC<Props> = ({
     }) => {
       // if the user drags up passed a threshold, then we cancel
       // the drag so that the sheet resets to its open position
-      if (my > 70) cancel();
+      if (position === "top" && my > 70) cancel();
+      if (position === "bottom" && my < -50) cancel();
 
       // when the user releases the sheet, we check whether it passed
       // the threshold for it to close, or if we reset it to its open positino
       if (last) {
-        my < -height * 0.15 || (vy > 0.5 && dy > 0)
-          ? close(vy)
-          : open({ canceled });
+        if (position === "top") {
+          my < -height * 0.15 || (vy > 0.5 && dy > 0)
+            ? close(vy)
+            : open({ canceled });
+        } else if (position === "bottom") {
+          my > height * 0.5 || (vy > 0.5 && dy > 0)
+            ? close(vy)
+            : open({ canceled });
+        }
       }
       // when the user keeps dragging, we just move the sheet according to
       // the cursor position
@@ -73,10 +84,25 @@ const PopupOnToggle: React.FC<Props> = ({
     {
       from: () => [0, y.get()],
       filterTaps: true,
-      bounds: { bottom: 0 },
+      bounds: bounds,
       rubberband: true,
     }
   );
+
+  const style =
+    position === "top"
+      ? {
+          top: `calc(100% - 150px)`,
+          height: `calc(100% + 150px)`,
+          transform: `translateX(-50%)`, // Translate used inline because it doesn't work in tailwind css. **Must investigate
+          y,
+        }
+      : {
+          bottom: `calc(-100vh + 100%)`,
+          height: `calc(100% + 180px + 20px)`,
+          transform: `translateX(-50%)`, // Translate used inline because it doesn't work in tailwind css. **Must investigate
+          y,
+        };
 
   return (
     <div className="flex w-full" style={{ overflow: "hidden" }}>
@@ -91,23 +117,25 @@ const PopupOnToggle: React.FC<Props> = ({
       </IconButton>
       <a.div
         className={classNames(
-          "w-[97vw] left-[50%] z-50 absolute rounded-[12px] flex flex-col justify-end",
+          "w-[97vw] left-[50%] z-50 absolute rounded-[12px] flex flex-col",
+          { "justify-end": position === "top" },
+          { "justify-start": position === "bottom" },
           styles.sheet,
           className
         )}
         {...bind()}
-        style={{
-          top: `calc(100% - 150px)`,
-          height: `calc(100% + 150px)`,
-          transform: `translateX(-50%)`, // Translate used inline because it doesn't work in tailwind css. **Must investigate
-          y,
-        }}
+        style={style}
         ref={springRef}
       >
-        {children}
-
         {/* Drag Handle Bar */}
-        <div className="!h-2 w-20 mt-5 mb-1 rounded-full bg-gray-500 m-auto"></div>
+        {position === "bottom" && (
+          <div className="!h-2 w-20 mb-5 mt-1 rounded-full bg-gray-500 m-auto"></div>
+        )}
+        {children}
+        {/* Drag Handle Bar */}
+        {position === "top" && (
+          <div className="!h-2 w-20 mt-5 mb-1 rounded-full bg-gray-500 m-auto"></div>
+        )}
       </a.div>
     </div>
   );
